@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="javafx_spring" />
         <module name="swen2-template" />
+        <module name="swen2-tourplanner" />
       </profile>
     </annotationProcessing>
   </component>
