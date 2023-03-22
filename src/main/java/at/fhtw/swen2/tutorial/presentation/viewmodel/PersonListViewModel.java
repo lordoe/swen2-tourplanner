@@ -18,8 +18,8 @@ public class PersonListViewModel {
     @Autowired
     PersonService personService;
 
-    private List<Person> masterData = new ArrayList<>();
-    private ObservableList<Person> personListItems = FXCollections.observableArrayList();
+    private final List<Person> masterData = new ArrayList<>();
+    private final ObservableList<Person> personListItems = FXCollections.observableArrayList();
 
     public ObservableList<Person> getPersonListItems() {
         return personListItems;

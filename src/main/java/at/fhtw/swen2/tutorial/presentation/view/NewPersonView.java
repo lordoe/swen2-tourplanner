@@ -1,13 +1,11 @@
 package at.fhtw.swen2.tutorial.presentation.view;
 
-import at.fhtw.swen2.tutorial.presentation.ViewManager;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.NewPersonViewModel;
 import at.fhtw.swen2.tutorial.service.PersonService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,9 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 @Component
@@ -63,15 +59,15 @@ public class NewPersonView implements Initializable {
 
     public void addTourButtonAction(ActionEvent event) {
         feedbackText.setText("Add Tour Button pressed!");
-        /*try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/at/fhtw/swen2/tutorial/presentation/view/NewPerson.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Test.fxml"));
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.show();
         } catch(Exception e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     public void deleteTourButtonAction(ActionEvent event) {

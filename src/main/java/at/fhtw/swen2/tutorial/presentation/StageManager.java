@@ -52,7 +52,7 @@ public class StageManager {
         primaryStage.setValue(stage);      
     
         try {
-            Parent parent = (Parent) viewManager.load("at/fhtw/swen2/tutorial/presentation/view/Application", stage);
+            Parent parent = viewManager.load("at/fhtw/swen2/tutorial/presentation/view/Application", stage);
             stage.setScene(new Scene(parent));
         } catch (IOException e) {
             log.error("Error occurred while creating Application scene", e);

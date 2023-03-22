@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Swen2TemplateApplication extends Application {
 
-    private Logger logger = LoggerFactory.getLogger(Swen2TemplateApplication.class);
+    private final Logger logger = LoggerFactory.getLogger(Swen2TemplateApplication.class);
     private ConfigurableApplicationContext applicationContext;
     
     @Override
