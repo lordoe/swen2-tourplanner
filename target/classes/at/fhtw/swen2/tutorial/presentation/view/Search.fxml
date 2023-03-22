@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx"
-            fx:controller="at.fhtw.swen2.tutorial.presentation.view.SearchController"
+            fx:controller="at.fhtw.swen2.tutorial.presentation.view.SearchView"
             prefHeight="400.0" prefWidth="600.0">
     <children>
 

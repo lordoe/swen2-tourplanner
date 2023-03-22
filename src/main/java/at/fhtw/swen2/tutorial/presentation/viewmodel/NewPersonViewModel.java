@@ -1,7 +1,7 @@
 package at.fhtw.swen2.tutorial.presentation.viewmodel;
 
 import at.fhtw.swen2.tutorial.service.PersonService;
-import at.fhtw.swen2.tutorial.service.model.Person;
+import at.fhtw.swen2.tutorial.service.dto.Person;
 import javafx.beans.property.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

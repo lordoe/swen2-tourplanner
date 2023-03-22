@@ -11,7 +11,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="200.0" prefWidth="200.0"
       spacing="8.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="at.fhtw.swen2.tutorial.presentation.view.NewPersonController">
+      fx:controller="at.fhtw.swen2.tutorial.presentation.view.NewPersonView">
 
    <children>
       <Label text="%tab.demo.title">

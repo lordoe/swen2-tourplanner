@@ -1,5 +1,6 @@
 package at.fhtw.swen2.tutorial;
 
+import at.fhtw.swen2.tutorial.presentation.Swen2TemplateApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javafx.application.Application;

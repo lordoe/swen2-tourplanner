@@ -1,7 +1,7 @@
 package at.fhtw.swen2.tutorial.service.mapper;
 
 import at.fhtw.swen2.tutorial.persistence.entities.PersonEntity;
-import at.fhtw.swen2.tutorial.service.model.Person;
+import at.fhtw.swen2.tutorial.service.dto.Person;
 import org.springframework.stereotype.Component;
 
 @Component

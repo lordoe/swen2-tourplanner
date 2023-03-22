@@ -1,6 +1,6 @@
 @startuml
 
-User -> (createItem)
+User -> (createUser)
 User -> (viewList)
 User -> (search)
 

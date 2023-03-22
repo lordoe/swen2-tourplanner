@@ -1,8 +1,8 @@
 package at.fhtw.swen2.tutorial.presentation;
 
-import at.fhtw.swen2.tutorial.presentation.view.ApplicationErrorEvent;
-import at.fhtw.swen2.tutorial.presentation.view.ApplicationShutdownEvent;
-import at.fhtw.swen2.tutorial.presentation.view.ApplicationStartupEvent;
+import at.fhtw.swen2.tutorial.presentation.events.ApplicationErrorEvent;
+import at.fhtw.swen2.tutorial.presentation.events.ApplicationShutdownEvent;
+import at.fhtw.swen2.tutorial.presentation.events.ApplicationStartupEvent;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.Property;
@@ -52,7 +52,7 @@ public class StageManager {
         primaryStage.setValue(stage);      
     
         try {
-            Parent parent = (Parent) viewManager.load("at/fhtw/swen2/tutorial/presentation/Application", stage);
+            Parent parent = (Parent) viewManager.load("at/fhtw/swen2/tutorial/presentation/view/Application", stage);
             stage.setScene(new Scene(parent));
         } catch (IOException e) {
             log.error("Error occurred while creating Application scene", e);
