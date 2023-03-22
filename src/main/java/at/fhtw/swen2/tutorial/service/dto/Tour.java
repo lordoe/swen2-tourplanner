@@ -12,7 +12,7 @@ public class Tour {
     private String from;
     private String to;
     private String transportType;
-    private Float distance;
-    private Float estimatedTime;
+    private Double distance;
+    private Double estimatedTime;
     private String routeInformation;
 }

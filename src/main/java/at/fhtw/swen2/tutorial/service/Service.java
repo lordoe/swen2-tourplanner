@@ -5,4 +5,5 @@ import java.util.List;
 public interface Service<T> {
     List<T> getList();
     T addNew(T t);
+    T findById(Long id);
 }
