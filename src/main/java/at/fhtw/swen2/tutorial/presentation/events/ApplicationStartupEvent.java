@@ -8,7 +8,7 @@ import lombok.Getter;
 public class ApplicationStartupEvent extends ApplicationEvent {
 
     @Getter 
-    private Stage stage;
+    private final Stage stage;
 
     public ApplicationStartupEvent(Object source, Stage stage) {
         super(source);

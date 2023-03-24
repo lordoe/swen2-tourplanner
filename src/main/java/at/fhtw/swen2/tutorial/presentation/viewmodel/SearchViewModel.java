@@ -11,7 +11,7 @@ public class SearchViewModel {
     @Autowired
     private PersonListViewModel personListViewModel;
 
-    private SimpleStringProperty searchString = new SimpleStringProperty();
+    private final SimpleStringProperty searchString = new SimpleStringProperty();
 
 
     public String getSearchString() {

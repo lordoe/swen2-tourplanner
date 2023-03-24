@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 @Component
 public class ViewManager {
 
-    private ApplicationContext applicationContext;
+    private final ApplicationContext applicationContext;
 
     public ViewManager(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;

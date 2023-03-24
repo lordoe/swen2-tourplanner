@@ -5,8 +5,8 @@ import org.springframework.context.ApplicationEvent;
 import lombok.Getter;
 
 public class ApplicationErrorEvent extends ApplicationEvent {
-    @Getter private String message;
-    @Getter private Throwable throwable;
+    @Getter private final String message;
+    @Getter private final Throwable throwable;
 
     public ApplicationErrorEvent(Object source, String message, Throwable throwable) {
         super(source);
