@@ -60,7 +60,7 @@ public class NewPersonView implements Initializable {
     public void addTourButtonAction(ActionEvent event) {
         feedbackText.setText("Add Tour Button pressed!");
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Test.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddTourWindow.fxml"));
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
