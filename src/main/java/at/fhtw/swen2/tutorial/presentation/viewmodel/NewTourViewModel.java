@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class NewPersonViewModel {
+public class NewTourViewModel {
     private SimpleLongProperty id = new SimpleLongProperty();
     private SimpleStringProperty name = new SimpleStringProperty();
     private SimpleBooleanProperty isEmployed = new SimpleBooleanProperty();
@@ -21,11 +21,11 @@ public class NewPersonViewModel {
     private Person person;
 
 
-    public NewPersonViewModel() {
+    public NewTourViewModel() {
 
     }
 
-    public NewPersonViewModel(Person person) {
+    public NewTourViewModel(Person person) {
         this.person = person;
         this.id = new SimpleLongProperty(person.getId());
         this.name = new SimpleStringProperty(person.getName());
