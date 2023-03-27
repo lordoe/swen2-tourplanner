@@ -26,7 +26,7 @@ public class SearchViewModel {
         this.searchString.set(searchString);
     }
 
-    public void search() {
+    public void search(){
         personListViewModel.filterList(getSearchString());
     }
 

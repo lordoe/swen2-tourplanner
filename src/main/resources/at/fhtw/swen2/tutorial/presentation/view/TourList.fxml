@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane layoutX="5.0" layoutY="86.0" prefHeight="200.0" prefWidth="200.0"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="at.fhtw.swen2.tutorial.presentation.view.TourListView">
+<children>
+        <VBox fx:id="dataContainer"
+              AnchorPane.leftAnchor="5.0"
+              AnchorPane.rightAnchor="5.0"
+              AnchorPane.topAnchor="25.0"> <!-- space from top because of feedbackText in newPerson(Tour) View -->
+        </VBox>
+</children>
+</AnchorPane>
