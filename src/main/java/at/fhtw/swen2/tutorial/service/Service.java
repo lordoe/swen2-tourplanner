@@ -6,4 +6,5 @@ public interface Service<T> {
     List<T> getList();
     T addNew(T t);
     T findById(Long id);
+    void delete(T t);
 }

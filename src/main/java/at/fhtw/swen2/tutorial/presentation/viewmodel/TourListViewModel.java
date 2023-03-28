@@ -6,8 +6,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.Initializable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 @Component
 public class TourListViewModel {
@@ -21,17 +25,23 @@ public class TourListViewModel {
 
     public void select(Tour rowData) {
         this.selected = rowData;
-        this.selectedTourName = new SimpleStringProperty(rowData.getName());
+        setSelectedTourName("selected: " + rowData.getName());
         System.out.println(selectedTourName);
+    }
+
+    public void setSelectedTourName(String selectedTourName) {
+        this.selectedTourName.set(selectedTourName);
+    }
+
+    public String getSelectedTourName() {
+        return selectedTourName.get();
     }
 
     public StringProperty selectedTourNameProperty(){
         return selectedTourName;
     }
     public void initList() {
-        tourService.getList().forEach(tour -> {
-            addItem(tour);
-        });
+        tourService.getList().forEach(this::addItem);
     }
     public ObservableList<Tour> getTourListItems() { return tourListItems; }
 
@@ -42,4 +52,15 @@ public class TourListViewModel {
     public Tour getSelected() {
         return selected;
     }
+
+    public void deleteSelectedTour(){
+        if(selected == null){
+            return;
+        }
+        tourService.delete(selected);
+        tourListItems.remove(selected);
+        setSelectedTourName("deleted " + selected.getName());
+    }
+
+
 }
