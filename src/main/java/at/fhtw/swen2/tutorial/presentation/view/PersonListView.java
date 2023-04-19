@@ -25,7 +25,6 @@ public class PersonListView implements Initializable{
     public TableView tableView = new TableView<>();
     @FXML
     private VBox dataContainer;
-
     @Override
     public void initialize(URL location, ResourceBundle rb){
         tableView.setItems(personListViewModel.getPersonListItems());

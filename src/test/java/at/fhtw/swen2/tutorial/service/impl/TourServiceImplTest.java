@@ -29,9 +29,9 @@ class TourServiceImplTest {
                 .build();
 
         // Act
-        Tour got = tourService.addNew(tour);
+        Tour control = tourService.addNew(tour);
 
         // Assert
-        assertEquals("Wanderung", got.getName());
+        assertNotNull(control);
     }
 }

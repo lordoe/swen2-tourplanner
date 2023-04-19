@@ -3,6 +3,8 @@ package at.fhtw.swen2.tutorial.service.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.Collection;
+
 @Data
 @Builder
 public class Tour {
@@ -15,4 +17,5 @@ public class Tour {
     private Double distance;
     private Double estimatedTime;
     private String routeInformation;
+    private Collection<TourLog> tourLogs;
 }
