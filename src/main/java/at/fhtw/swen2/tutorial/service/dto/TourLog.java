@@ -16,4 +16,16 @@ public class TourLog {
     private Integer totalTime;
     private Integer rating;
     private Tour tour;
+    @Override
+    public String toString() {
+        return "TourLog{" +
+                "id=" + id +
+                ", dateTime=" + dateTime +
+                ", comment='" + comment + '\'' +
+                ", difficulty=" + difficulty +
+                ", totalTime=" + totalTime +
+                ", rating=" + rating +
+                ", tour=" + tour != null ? tour.getName() : "null" +
+                '}';
+    }
 }

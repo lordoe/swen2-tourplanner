@@ -28,4 +28,17 @@ public class TourLogEntity {
         @ManyToOne
         @JoinColumn(name = "tour_id")
         private TourEntity tour;
+
+        @Override
+        public String toString() {
+                return "TourLogEntity{" +
+                        "id=" + id +
+                        ", dateTime=" + dateTime +
+                        ", comment='" + comment + '\'' +
+                        ", difficulty=" + difficulty +
+                        ", totalTime=" + totalTime +
+                        ", rating=" + rating +
+                        ", tour=" + tour != null ? tour.getName() : "null" +
+                        '}';
+        }
 }

@@ -24,6 +24,7 @@ class TourLogMapperTest {
     @Test
     void tourLogfromEntityTest() {
         // Arrange
+        TourEntity tourEntity = TourEntity.builder().name("hello world").build();
         TourLogEntity tourLogEntity = TourLogEntity.builder()
                 .id(7L)
                 .rating(19)
@@ -31,7 +32,9 @@ class TourLogMapperTest {
                 .difficulty(Difficulty.EASY)
                 .dateTime(new Date(333))
                 .comment("testcase")
+                .tour(tourEntity)
                 .build();
+        tourEntity.addTourLog(tourLogEntity);
 
         // Act
         TourLog tourLog = tourLogMapper.fromEntity(tourLogEntity);
@@ -42,6 +45,8 @@ class TourLogMapperTest {
         assertEquals(tourLogEntity.getRating(), tourLog.getRating());
         assertEquals(tourLogEntity.getTotalTime(), tourLog.getTotalTime());
         assertEquals(tourLogEntity.getDifficulty(), tourLog.getDifficulty());
+        assertEquals(tourLogEntity.getTour().getName(), tourLog.getTour().getName());
+        System.out.println(tourLog.getTour());
     }
 
     @Test
@@ -55,7 +60,9 @@ class TourLogMapperTest {
                 .difficulty(Difficulty.EASY)
                 .dateTime(new Date(333))
                 .comment("testcase")
+                .tour(tour)
                 .build();
+        tour.addTourLog(tourLog);
 
         // Act
         TourLogEntity tourLogEntity = tourLogMapper.toEntity(tourLog);
@@ -66,5 +73,7 @@ class TourLogMapperTest {
         assertEquals(tourLogEntity.getRating(), tourLog.getRating());
         assertEquals(tourLogEntity.getTotalTime(), tourLog.getTotalTime());
         assertEquals(tourLogEntity.getDifficulty(), tourLog.getDifficulty());
+        assertEquals(tourLogEntity.getTour().getName(), tourLog.getTour().getName());
+        System.out.println(tourLogEntity);
     }
 }
