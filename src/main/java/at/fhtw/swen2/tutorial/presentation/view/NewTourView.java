@@ -1,16 +1,15 @@
 package at.fhtw.swen2.tutorial.presentation.view;
 
+import at.fhtw.swen2.tutorial.presentation.ViewManager;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.NewTourViewModel;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourListViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,9 @@ public class NewTourView implements Initializable {
     private NewTourViewModel newTourViewModel;
     @Autowired
     private TourListViewModel tourListViewModel;
+
+    @Autowired
+    private ViewManager viewManager;
     @FXML
     private Button addTourButton;
     @FXML
@@ -39,16 +41,16 @@ public class NewTourView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle rb) {
+
         selectedTour.textProperty().bind(tourListViewModel.selectedTourNameProperty());
-        System.out.println("initailized");
+        System.out.println("NewTourView initialized");
     }
 
     public void addTourButtonAction(ActionEvent event) {
         //feedbackText.setText("Add Tour Button pressed!");
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddTourWindow.fxml"));
-            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
+            Parent root1 = viewManager.load("at/fhtw/swen2/tutorial/presentation/view/AddTourWindow.fxml", stage);
             stage.setScene(new Scene(root1));
             stage.show();
         } catch(Exception e) {
