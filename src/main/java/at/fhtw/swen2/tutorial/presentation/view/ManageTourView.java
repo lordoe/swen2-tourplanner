@@ -1,11 +1,10 @@
 package at.fhtw.swen2.tutorial.presentation.view;
 
-import at.fhtw.swen2.tutorial.presentation.viewmodel.ManageTourViewModel;
+import at.fhtw.swen2.tutorial.presentation.ViewManager;
+import at.fhtw.swen2.tutorial.presentation.viewmodel.AddTourWindowViewModel;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourListViewModel;
-import at.fhtw.swen2.tutorial.service.dto.Tour;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.w3c.dom.Text;
 
 import java.net.URL;
 import java.util.Optional;
@@ -27,11 +25,16 @@ import java.util.ResourceBundle;
 public class ManageTourView implements Initializable {
 
     @Autowired
-    private ManageTourViewModel manageTourViewModel;
+    private AddTourWindowViewModel addTourWindowViewModel;
     @Autowired
     private TourListViewModel tourListViewModel;
+
+    @Autowired
+    private ViewManager viewManager;
     @FXML
     private Button addTourButton;
+    @FXML
+    private Button deleteTourButton;
     @FXML
     private Label selectedTour;
     @FXML
@@ -43,14 +46,14 @@ public class ManageTourView implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle rb) {
         selectedTour.textProperty().bind(tourListViewModel.selectedTourNameProperty());
+        System.out.println("initailized");
     }
 
     public void addTourButtonAction(ActionEvent event) {
         //feedbackText.setText("Add Tour Button pressed!");
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddTourWindow.fxml"));
-            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
+            Parent root1 = viewManager.load("at/fhtw/swen2/tutorial/presentation/view/AddTourWindow.fxml", stage);
             stage.setScene(new Scene(root1));
             stage.show();
         } catch(Exception e) {
