@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class SearchViewModel {
 
     @Autowired
-    private PersonListViewModel personListViewModel;
+    private TourLogListViewModel tourLogListViewModel;
 
     private final SimpleStringProperty searchString = new SimpleStringProperty();
 
@@ -27,7 +27,7 @@ public class SearchViewModel {
     }
 
     public void search(){
-        personListViewModel.filterList(getSearchString());
+        tourLogListViewModel.filterList(getSearchString());
     }
 
 

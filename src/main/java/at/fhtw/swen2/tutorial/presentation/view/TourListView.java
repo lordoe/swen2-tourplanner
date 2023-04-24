@@ -1,6 +1,7 @@
 package at.fhtw.swen2.tutorial.presentation.view;
 
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourListViewModel;
+import at.fhtw.swen2.tutorial.presentation.viewmodel.TourLogListViewModel;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +23,8 @@ public class TourListView implements Initializable {
 
     @Autowired
     private TourListViewModel tourListViewModel;
+    @Autowired
+    private TourLogListViewModel tourLogListViewModel;
     @FXML
     public TableView tableView = new TableView<>();
     @FXML
@@ -49,7 +52,10 @@ public class TourListView implements Initializable {
             row.setOnMouseClicked(event -> {
                 if(! row.isEmpty()){
                     Tour rowData = row.getItem();
+                    // select tour for further processing
                     tourListViewModel.select(rowData);
+                    // show tourLogs
+                    tourLogListViewModel.showLogsOfTour(rowData);
                 }
             });
             return row;

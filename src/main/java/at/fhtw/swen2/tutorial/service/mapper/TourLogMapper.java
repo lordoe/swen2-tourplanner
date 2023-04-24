@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Component
 public class TourLogMapper extends AbstractMapper<TourLogEntity, TourLog>{

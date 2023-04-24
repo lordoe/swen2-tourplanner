@@ -28,6 +28,8 @@ public class SearchView {
     private Button searchButton;
     @FXML
     private Label searchLabel;
+    @FXML
+    private Button addTourLogButton;
 
     @FXML
     private void initialize() {
@@ -35,7 +37,6 @@ public class SearchView {
         searchField.textProperty().bindBidirectional(searchViewModel.searchStringProperty());
 
         // search panel
-        searchButton.setText("Search");
         searchButton.setOnAction(event -> loadData());
         searchButton.setStyle("-fx-background-color: slateblue; -fx-text-fill: white;");
         searchField.setOnKeyPressed(event -> {

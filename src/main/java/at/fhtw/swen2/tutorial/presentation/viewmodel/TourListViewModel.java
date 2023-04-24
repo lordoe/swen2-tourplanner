@@ -18,6 +18,9 @@ public class TourListViewModel {
     @Autowired
     public TourService tourService;
 
+    @Autowired
+    public TourLogListViewModel tourLogListViewModel;
+
     private final ObservableList<Tour> tourListItems = FXCollections.observableArrayList();
 
     private Tour selected;
@@ -25,7 +28,7 @@ public class TourListViewModel {
 
     public void select(Tour rowData) {
         this.selected = rowData;
-        setSelectedTourName("selected: " + rowData.getName());
+        setSelectedTourName(" -> " + rowData.getName());
         System.out.println(selectedTourName);
     }
 
@@ -59,7 +62,9 @@ public class TourListViewModel {
         }
         tourService.delete(selected);
         tourListItems.remove(selected);
-        setSelectedTourName("deleted " + selected.getName());
+        tourLogListViewModel.clearItems();
+        setSelectedTourName(" deleted " + selected.getName());
+        selected = null;
     }
 
 

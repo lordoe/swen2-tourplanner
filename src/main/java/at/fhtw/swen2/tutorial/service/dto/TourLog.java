@@ -25,7 +25,7 @@ public class TourLog {
                 ", difficulty=" + difficulty +
                 ", totalTime=" + totalTime +
                 ", rating=" + rating +
-                ", tour=" + tour != null ? tour.getName() : "null" +
+                ", tour=" + (tour != null ? tour.getName() : "null") +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package at.fhtw.swen2.tutorial.service.impl;
 
 import at.fhtw.swen2.tutorial.persistence.entities.TourEntity;
+import at.fhtw.swen2.tutorial.persistence.repositories.TourLogRepository;
 import at.fhtw.swen2.tutorial.persistence.repositories.TourRepository;
 import at.fhtw.swen2.tutorial.service.TourService;
 import at.fhtw.swen2.tutorial.service.mapper.TourMapper;

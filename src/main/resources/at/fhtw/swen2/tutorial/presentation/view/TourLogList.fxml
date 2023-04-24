@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="at.fhtw.swen2.tutorial.presentation.view.PersonListView"
+            fx:controller="at.fhtw.swen2.tutorial.presentation.view.TourLogListView"
             prefHeight="400.0" prefWidth="600.0">
     <children>
         <VBox fx:id="dataContainer"

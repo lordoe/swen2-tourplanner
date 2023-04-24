@@ -9,8 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,7 @@ import org.springframework.stereotype.Component;
 import org.w3c.dom.Text;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 @Component
@@ -34,6 +34,10 @@ public class ManageTourView implements Initializable {
     private Button addTourButton;
     @FXML
     private Label selectedTour;
+    @FXML
+    private Button searchTourButton;
+    @FXML
+    private TextField searchTourField;
 
 
     @Override
@@ -55,6 +59,22 @@ public class ManageTourView implements Initializable {
     }
 
     public void deleteTourButtonAction(ActionEvent event) {
-        tourListViewModel.deleteSelectedTour();
+        if(tourListViewModel.getSelected() == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No Tour selected");
+            alert.setContentText("Please select a Tour to delete");
+            alert.showAndWait();
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText("You are about to delete " + selectedTour.getText());
+        alert.setContentText("Cannot be undone. Are you sure?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            tourListViewModel.deleteSelectedTour();
+        }
     }
 }

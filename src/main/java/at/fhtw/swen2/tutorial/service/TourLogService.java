@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface TourLogService extends Service<TourLog> {
 
-    List<TourLog> findAllByTourId(Long tourId);
+    List<TourLog> findByTourId(Long tourId);
 }

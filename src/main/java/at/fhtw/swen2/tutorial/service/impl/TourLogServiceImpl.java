@@ -47,7 +47,7 @@ public class TourLogServiceImpl implements TourLogService {
     }
 
     @Override
-    public List<TourLog> findAllByTourId(Long id) {
-        return tourLogMapper.fromEntity(tourLogRepository.findAllByTourId(id));
+    public List<TourLog> findByTourId(Long id) {
+        return tourLogMapper.fromEntity(tourLogRepository.findByTourId(id));
     }
 }

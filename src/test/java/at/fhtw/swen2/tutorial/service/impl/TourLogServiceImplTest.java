@@ -26,28 +26,29 @@ class TourLogServiceImplTest {
     @Test
     public void testService(){
         // Arrange
-        Tour tour = Tour.builder()
+        Tour controlTour = tourService.addNew(Tour.builder()
                 .name("Wanderung")
-                .build();
+                .build());
 
         TourLog tourLog = TourLog.builder()
                 .comment("Wanderung")
                 .rating(5)
                 .difficulty(Difficulty.EASY)
+                .tour(controlTour)
                 .build();
         TourLog tourLog1 = TourLog.builder()
                 .comment("Hatscher")
                 .rating(8)
                 .difficulty(Difficulty.EASY)
+                .tour(controlTour)
                 .build();
 
         // Act
-        Tour controlTour = tourService.addNew(tour);
-        tourLog.setTour(controlTour);
-        tourLog1.setTour(controlTour);
+        //tourLog.setTour(controlTour);
+        //tourLog1.setTour(controlTour);
         tourLogService.addNew(tourLog);
         tourLogService.addNew(tourLog1);
-        List<TourLog> tourLogs = tourLogService.findAllByTourId(controlTour.getId());
+        List<TourLog> tourLogs = tourLogService.findByTourId(controlTour.getId());
 
         // Assert
         assertNotNull(controlTour);

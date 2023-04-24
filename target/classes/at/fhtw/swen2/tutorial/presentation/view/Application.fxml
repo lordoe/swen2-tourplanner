@@ -41,7 +41,7 @@
                <content>
                   <SplitPane disable="true" dividerPositions="0.265">
                     <items>
-                        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="220">
                            <children>
                                <fx:include source="NewTour.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                <fx:include source="TourList.fxml" />
@@ -52,7 +52,7 @@
                                <fx:include source="Search.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                           <children>
-                              <fx:include source="PersonList.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
+                              <fx:include source="TourLogList.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
                               <VBox layoutX="26.0" layoutY="59.0" prefHeight="200.0" prefWidth="531.0" />
                           </children>
                       </AnchorPane>

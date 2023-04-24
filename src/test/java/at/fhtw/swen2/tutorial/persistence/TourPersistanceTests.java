@@ -63,7 +63,7 @@ public class TourPersistanceTests {
 
         // Act
         TourEntity control = tourRepository.save(tourEntity);
-        List<TourLogEntity> tourLogs = tourLogRepository.findAllByTourId(tourEntity.getId());
+        List<TourLogEntity> tourLogs = tourLogRepository.findByTourId(tourEntity.getId());
 
         // Assert
         assertEquals(tourEntity,control);

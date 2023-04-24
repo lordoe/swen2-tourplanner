@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Data
 @Builder
@@ -38,7 +38,7 @@ public class TourLogEntity {
                         ", difficulty=" + difficulty +
                         ", totalTime=" + totalTime +
                         ", rating=" + rating +
-                        ", tour=" + tour != null ? tour.getName() : "null" +
+                        ", tour=" + (tour != null ? tour.getName() : "null") +
                         '}';
         }
 }

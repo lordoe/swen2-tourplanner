@@ -1,6 +1,6 @@
 package at.fhtw.swen2.tutorial.presentation.view;
 
-import at.fhtw.swen2.tutorial.presentation.viewmodel.PersonListViewModel;
+import at.fhtw.swen2.tutorial.presentation.viewmodel.TourLogListViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -16,10 +16,10 @@ import java.util.ResourceBundle;
 
 @Component
 @Scope("prototype")
-public class PersonListView implements Initializable{
+public class TourLogListView implements Initializable{
 
     @Autowired
-    public PersonListViewModel personListViewModel;
+    public TourLogListViewModel tourLogListViewModel;
 
     @FXML
     public TableView tableView = new TableView<>();
@@ -27,19 +27,19 @@ public class PersonListView implements Initializable{
     private VBox dataContainer;
     @Override
     public void initialize(URL location, ResourceBundle rb){
-        tableView.setItems(personListViewModel.getPersonListItems());
+        tableView.setItems(tourLogListViewModel.gettourLogListListItems());
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         TableColumn id = new TableColumn("ID");
         id.setCellValueFactory(new PropertyValueFactory("id"));
-        TableColumn name = new TableColumn("NAME");
-        name.setCellValueFactory(new PropertyValueFactory("name"));
-        TableColumn employed = new TableColumn("EMPLOYED");
-        employed.setCellValueFactory(new PropertyValueFactory("isEmployed"));
-        tableView.getColumns().addAll(id, name, employed);
+        TableColumn comment = new TableColumn("COMMENT");
+        comment.setCellValueFactory(new PropertyValueFactory("comment"));
+        TableColumn date = new TableColumn("DATE");
+        date.setCellValueFactory(new PropertyValueFactory("dateTime"));
+        tableView.getColumns().addAll(id, comment, date);
 
         dataContainer.getChildren().add(tableView);
-        personListViewModel.initList();
+        tourLogListViewModel.initList();
     }
 
 }
