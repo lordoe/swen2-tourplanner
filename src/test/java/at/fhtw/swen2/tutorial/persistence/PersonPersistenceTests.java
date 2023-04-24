@@ -13,8 +13,6 @@ class PersonPersistenceTests {
 
 	@Autowired
 	private PersonRepository personRepository;
-	@Autowired
-	private TourRepository tourRepository;
 
 	@Test
 	void testPersonRepository() {
@@ -25,10 +23,4 @@ class PersonPersistenceTests {
 		personRepository.save(maxi);
 		personRepository.findAll().forEach(System.out::println);
 	}
-
-	@Test
-	void testTour() {
-		tourRepository.save(TourEntity.builder().build());
-	}
-
 }

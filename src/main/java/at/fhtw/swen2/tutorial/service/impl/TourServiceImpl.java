@@ -42,4 +42,9 @@ public class TourServiceImpl implements TourService {
 
         return tourMapper.fromEntity(tourEntity);
     }
+
+    @Override
+    public void delete(Tour tour) {
+        tourRepository.delete(tourMapper.toEntity(tour));
+    }
 }
