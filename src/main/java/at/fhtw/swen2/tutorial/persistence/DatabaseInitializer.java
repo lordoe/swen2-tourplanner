@@ -29,12 +29,6 @@ public class DatabaseInitializer implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        List<PersonEntity> personList = new ArrayList<>();
-        personList.add(PersonEntity.builder().id(5L).name("John").isEmployed(true).build());
-        personList.add(PersonEntity.builder().id(7L).name("Albert").isEmployed(true).build());
-        personList.add(PersonEntity.builder().id(11L).name("Monica").isEmployed(true).build());
-        personRepository.saveAll(personList);
-
         // add some tours
         Tour one = tourService.addNew(Tour.builder().name("TOUR1").from("Scheibs").to("Nebraska").build());
         Tour two = tourService.addNew(Tour.builder().name("Achterbahn").from("Wien").to("New York").build());
