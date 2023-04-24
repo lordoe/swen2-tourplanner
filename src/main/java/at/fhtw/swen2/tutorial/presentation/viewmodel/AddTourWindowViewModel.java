@@ -16,7 +16,7 @@ public class AddTourWindowViewModel {
     public TourMapper tourMapper;
 
     @Autowired
-    public TourRepository tourRepository;
+    public TourService tourService;
 
     private final SimpleStringProperty nameString = new SimpleStringProperty("");
     private final SimpleStringProperty fromString = new SimpleStringProperty("");
@@ -25,7 +25,7 @@ public class AddTourWindowViewModel {
 
     public void addTour(Tour tour) {
         //  logger.debug("User tries to add a tour to the database; Tour name: " + tour.getName());
-        tourRepository.save(tourMapper.toEntity(tour));
+        tourService.addNew(tour);
     }
 
     public SimpleStringProperty nameStringProperty() {
