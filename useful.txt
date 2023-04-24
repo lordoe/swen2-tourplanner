@@ -1,0 +1,9 @@
+
+dialogues
+https://code.makery.ch/blog/javafx-dialogs-official/
+
+mapquest
+https://www.mapquestapi.com/staticmap/v5/map?start=Wien,Austria&end=Klagenfurt,Austria&size=600,400@2x&key=GGXd0kJvlT6mo4pnMxYv4aIAWE5uZfHd
+
+key:
+GGXd0kJvlT6mo4pnMxYv4aIAWE5uZfHd
