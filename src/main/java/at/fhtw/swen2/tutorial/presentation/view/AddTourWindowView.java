@@ -5,6 +5,7 @@ import at.fhtw.swen2.tutorial.service.dto.Tour;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,14 @@ public class AddTourWindowView implements Initializable {
     }
 
     public void confirmTourButtonAction(ActionEvent event)  {
+        if(tourNameTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || toTextField.getText().isEmpty() || fromTextField.getText().isEmpty() ){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Missing information");
+            alert.setContentText("Please insert the missing data for the Tour");
+            alert.showAndWait();
+            return;
+        }
         Tour tour = Tour.builder()
                 .name(tourNameTextField.getText())
                 .description(descriptionTextField.getText())
