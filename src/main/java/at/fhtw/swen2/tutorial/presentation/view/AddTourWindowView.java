@@ -63,9 +63,9 @@ public class AddTourWindowView implements Initializable {
     public void confirmTourButtonAction(ActionEvent event)  {
         Tour tour = Tour.builder()
                 .name(tourNameTextField.getText())
-                .description(fromTextField.getText())
-                .from(toTextField.getText())
-                .to(descriptionTextField.getText())
+                .description(descriptionTextField.getText())
+                .from(fromTextField.getText())
+                .to(toTextField.getText())
                 .distance(33.)
                 .estimatedTime(33.)
                 .transportType("foot")
