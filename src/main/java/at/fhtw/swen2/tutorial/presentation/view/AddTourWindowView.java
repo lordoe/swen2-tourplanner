@@ -11,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 
 
 
@@ -47,7 +47,7 @@ public class AddTourWindowView implements Initializable {
     private Button confirmTourButton;
 
     @FXML
-    private Button cancelButton;
+    private Button cancelTourButton;
 
     public AddTourWindowView(AddTourWindowViewModel addTourWindowViewModel) {
         this.addTourWindowViewModel = addTourWindowViewModel;
@@ -72,9 +72,13 @@ public class AddTourWindowView implements Initializable {
                 .routeInformation("link")
                 .build();
         addTourWindowViewModel.addTour(tour);
-      /*  Stage stage = (Stage) closeButton.getScene().getWindow();
-        // do what you have to do
-        stage.close();*/
+        Stage stage = (Stage) confirmTourButton.getScene().getWindow();
+        stage.close();
+    }
+
+    public void cancelTourButtonAction(ActionEvent event){
+        Stage stage = (Stage) cancelTourButton.getScene().getWindow();
+        stage.close();
     }
 
 

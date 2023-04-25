@@ -44,7 +44,7 @@
          </font>
       </Label>
       <ChoiceBox fx:id="transportModeCheckBox" layoutX="35.0" layoutY="409.0" prefWidth="150.0" AnchorPane.leftAnchor="25.0" />
-     <Button layoutX="140.0" layoutY="449.0" mnemonicParsing="false" text="confirm" onAction="#confirmTourButtonAction" AnchorPane.leftAnchor="140.0" />
-      <Button layoutX="406.0" layoutY="450.0" mnemonicParsing="false" text="cancel" AnchorPane.rightAnchor="140.0" />
+     <Button fx:id="confirmTourButton" layoutX="140.0" layoutY="449.0" mnemonicParsing="false" text="confirm" onAction="#confirmTourButtonAction" AnchorPane.leftAnchor="140.0" />
+      <Button fx:id="cancelTourButton" layoutX="406.0" layoutY="450.0" mnemonicParsing="false" text="cancel" onAction="#cancelTourButtonAction" AnchorPane.rightAnchor="140.0" />
    </children>
 </AnchorPane>
