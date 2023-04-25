@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -71,7 +72,9 @@ public class AddTourWindowView implements Initializable {
                 .routeInformation("link")
                 .build();
         addTourWindowViewModel.addTour(tour);
-
+      /*  Stage stage = (Stage) closeButton.getScene().getWindow();
+        // do what you have to do
+        stage.close();*/
     }
 
 

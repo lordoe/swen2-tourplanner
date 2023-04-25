@@ -13,10 +13,13 @@ import org.springframework.stereotype.Component;
 public class AddTourWindowViewModel {
 
     @Autowired
-    public TourMapper tourMapper;
+    private TourMapper tourMapper;
 
     @Autowired
-    public TourService tourService;
+    private TourService tourService;
+
+    @Autowired
+    private TourListViewModel tourListViewModel;
 
     private final SimpleStringProperty nameString = new SimpleStringProperty("");
     private final SimpleStringProperty fromString = new SimpleStringProperty("");
@@ -25,7 +28,8 @@ public class AddTourWindowViewModel {
 
     public void addTour(Tour tour) {
         //  logger.debug("User tries to add a tour to the database; Tour name: " + tour.getName());
-        tourService.addNew(tour);
+        Tour savedTour = tourService.addNew(tour);
+        tourListViewModel.addItem(savedTour);
     }
 
     public SimpleStringProperty nameStringProperty() {
