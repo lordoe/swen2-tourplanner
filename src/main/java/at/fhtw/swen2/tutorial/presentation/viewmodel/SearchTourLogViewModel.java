@@ -4,15 +4,13 @@ import javafx.beans.property.SimpleStringProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 @Component
-public class SearchViewModel {
+public class SearchTourLogViewModel {
 
     @Autowired
     private TourLogListViewModel tourLogListViewModel;
 
     private final SimpleStringProperty searchString = new SimpleStringProperty();
-
 
     public String getSearchString() {
         return searchString.get();

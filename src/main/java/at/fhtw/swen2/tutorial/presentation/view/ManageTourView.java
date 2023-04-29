@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,6 @@ import java.util.ResourceBundle;
 public class ManageTourView implements Initializable {
 
     @Autowired
-    private AddTourWindowViewModel addTourWindowViewModel;
-    @Autowired
     private TourListViewModel tourListViewModel;
 
     @Autowired
@@ -41,12 +40,26 @@ public class ManageTourView implements Initializable {
     private Button searchTourButton;
     @FXML
     private TextField searchTourField;
-
+    @FXML
+    public Label searchLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle rb) {
         selectedTour.textProperty().bind(tourListViewModel.selectedTourNameProperty());
         System.out.println("initailized");
+
+        searchTourField.textProperty().bindBidirectional(tourListViewModel.searchStringProperty());
+        // search panel
+        searchTourButton.setOnAction(event -> tourListViewModel.search());
+        searchTourButton.setStyle("-fx-background-color: slateblue; -fx-text-fill: white;");
+        searchTourField.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                tourListViewModel.search();
+            }
+        });
+        searchTourField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchLabel.setText(newValue);
+        });
     }
 
     public void addTourButtonAction(ActionEvent event) {

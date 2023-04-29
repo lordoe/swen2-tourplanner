@@ -13,8 +13,10 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="200.0" prefWidth="200.0" spacing="8.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.fhtw.swen2.tutorial.presentation.view.ManageTourView">
 
    <children>
-      <Label text="Search Tour:"/>
-      <HBox>
+       <HBox>
+      <Label text="Search Tour: "/><Label fx:id="searchLabel" style="-fx-font-weight: bold"/>
+       </HBox>
+       <HBox>
          <TextField fx:id="searchTourField" />
          <Button fx:id="searchTourButton" text="find"/>
       </HBox>
