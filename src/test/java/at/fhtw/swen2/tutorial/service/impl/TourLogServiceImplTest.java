@@ -34,13 +34,13 @@ class TourLogServiceImplTest {
                 .comment("Wanderung")
                 .rating(5)
                 .difficulty(Difficulty.EASY)
-                .tour(controlTour)
+                .TourId(controlTour.getId())
                 .build();
         TourLog tourLog1 = TourLog.builder()
                 .comment("Hatscher")
                 .rating(8)
                 .difficulty(Difficulty.EASY)
-                .tour(controlTour)
+                .TourId(controlTour.getId())
                 .build();
 
         // Act
@@ -54,6 +54,5 @@ class TourLogServiceImplTest {
         assertNotNull(controlTour);
         assertNotNull(tourLogs);
         assertEquals(2, tourLogs.size());
-        System.out.println(controlTour.getTourLogs());
     }
 }

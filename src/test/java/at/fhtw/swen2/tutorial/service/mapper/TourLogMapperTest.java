@@ -3,6 +3,7 @@ package at.fhtw.swen2.tutorial.service.mapper;
 import at.fhtw.swen2.tutorial.persistence.entities.TourEntity;
 import at.fhtw.swen2.tutorial.persistence.entities.TourLogEntity;
 import at.fhtw.swen2.tutorial.persistence.utils.Difficulty;
+import at.fhtw.swen2.tutorial.service.TourService;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
 import at.fhtw.swen2.tutorial.service.dto.TourLog;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,9 @@ class TourLogMapperTest {
 
     @Autowired
     private TourLogMapper tourLogMapper;
+
+    @Autowired
+    private TourService tourService;
 
     @Test
     void tourLogfromEntityTest() {
@@ -45,14 +49,13 @@ class TourLogMapperTest {
         assertEquals(tourLogEntity.getRating(), tourLog.getRating());
         assertEquals(tourLogEntity.getTotalTime(), tourLog.getTotalTime());
         assertEquals(tourLogEntity.getDifficulty(), tourLog.getDifficulty());
-        assertEquals(tourLogEntity.getTour().getName(), tourLog.getTour().getName());
-        System.out.println(tourLog.getTour());
+        assertEquals(tourLogEntity.getTour().getId(), tourLog.getTourId());
     }
 
     @Test
     void tourLogToEntityTest() {
         // Arrange
-        Tour tour = Tour.builder().name("myTour").build();
+        Tour tour = tourService.addNew(Tour.builder().name("myTour").build());
         TourLog tourLog = TourLog.builder()
                 .id(7L)
                 .rating(19)
@@ -60,9 +63,8 @@ class TourLogMapperTest {
                 .difficulty(Difficulty.EASY)
                 .dateTime(new Date(333))
                 .comment("testcase")
-                .tour(tour)
+                .TourId(tour.getId())
                 .build();
-        tour.addTourLog(tourLog);
 
         // Act
         TourLogEntity tourLogEntity = tourLogMapper.toEntity(tourLog);
@@ -73,7 +75,7 @@ class TourLogMapperTest {
         assertEquals(tourLogEntity.getRating(), tourLog.getRating());
         assertEquals(tourLogEntity.getTotalTime(), tourLog.getTotalTime());
         assertEquals(tourLogEntity.getDifficulty(), tourLog.getDifficulty());
-        assertEquals(tourLogEntity.getTour().getName(), tourLog.getTour().getName());
+        assertEquals(tourLogEntity.getTour().getId(), tourLog.getTourId());
         System.out.println(tourLogEntity);
     }
 }

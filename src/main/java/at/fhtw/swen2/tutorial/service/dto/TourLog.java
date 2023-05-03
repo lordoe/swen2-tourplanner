@@ -15,7 +15,7 @@ public class TourLog {
     private Difficulty difficulty;
     private Integer totalTime;
     private Integer rating;
-    private Tour tour;
+    private Long TourId;
     @Override
     public String toString() {
         return "TourLog{" +
@@ -25,7 +25,7 @@ public class TourLog {
                 ", difficulty=" + difficulty +
                 ", totalTime=" + totalTime +
                 ", rating=" + rating +
-                ", tour=" + (tour != null ? tour.getName() : "null") +
+                ", tourId=" + TourId +
                 '}';
     }
 }

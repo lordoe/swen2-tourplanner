@@ -2,6 +2,7 @@ package at.fhtw.swen2.tutorial.service.mapper;
 
 import at.fhtw.swen2.tutorial.persistence.entities.TourEntity;
 import at.fhtw.swen2.tutorial.persistence.entities.TourLogEntity;
+import at.fhtw.swen2.tutorial.persistence.repositories.TourLogRepository;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
 import at.fhtw.swen2.tutorial.service.dto.TourLog;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class TourMapper extends AbstractMapper<TourEntity, Tour> {
     @Lazy
     private TourLogMapper tourLogMapper;
 
+    @Autowired
+    private TourLogRepository tourLogRepository;
+
     @Override
     public Tour fromEntity(TourEntity entity) {
         if (entity == null) {
@@ -35,18 +39,7 @@ public class TourMapper extends AbstractMapper<TourEntity, Tour> {
                 .distance(entity.getDistance())
                 .estimatedTime(entity.getEstimatedTime())
                 .routeInformation(entity.getRouteInformation())
-                //.tourLogs(tourLogMapper.fromEntity(entity.getTourLogs()))
                 .build();
-
-        List<TourLogEntity> tourLogEntities = entity.getTourLogs();
-        if (tourLogEntities != null && !tourLogEntities.isEmpty()) {
-            tourLogEntities.forEach(tourLogEntity -> {
-                tourLogEntity.setTour(null);
-                TourLog tourLog = tourLogMapper.fromEntity(tourLogEntity);
-                tourLog.setTour(tour);
-                tour.addTourLog(tourLog);
-            });
-        }
 
         return tour;
     }
@@ -66,18 +59,9 @@ public class TourMapper extends AbstractMapper<TourEntity, Tour> {
                 .distance(tour.getDistance())
                 .estimatedTime(tour.getEstimatedTime())
                 .routeInformation(tour.getRouteInformation())
-                //.tourLogs(tourLogMapper.toEntity(tour.getTourLogs()))
+                .tourLogs(tourLogRepository.findByTourId(tour.getId()))
                 .build();
 
-        List<TourLog> tourLogs = tour.getTourLogs();
-        if (tourLogs != null && !tourLogs.isEmpty()){
-            tourLogs.forEach(tourLog -> {
-                tourLog.setTour(null);
-                TourLogEntity tourLogEntity = tourLogMapper.toEntity(tourLog);
-                tourLogEntity.setTour(tourEntity);
-                tourEntity.addTourLog(tourLogEntity);
-            });
-        }
         return tourEntity;
     }
 }

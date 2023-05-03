@@ -19,15 +19,6 @@ public class Tour {
     private Double distance;
     private Double estimatedTime;
     private String routeInformation;
-    private List<TourLog> tourLogs;
-
-    public void addTourLog(TourLog tourlog) {
-        if (tourLogs == null) {
-            tourLogs = new ArrayList<>();
-        }
-        tourLogs.add(tourlog);
-        tourlog.setTour(this);
-    }
 
     @Override
     public String toString() {
