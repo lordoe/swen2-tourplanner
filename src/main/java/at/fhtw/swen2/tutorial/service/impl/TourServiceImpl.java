@@ -1,9 +1,12 @@
 package at.fhtw.swen2.tutorial.service.impl;
 
 import at.fhtw.swen2.tutorial.persistence.entities.TourEntity;
+import at.fhtw.swen2.tutorial.persistence.entities.TourLogEntity;
 import at.fhtw.swen2.tutorial.persistence.repositories.TourLogRepository;
 import at.fhtw.swen2.tutorial.persistence.repositories.TourRepository;
 import at.fhtw.swen2.tutorial.service.TourService;
+import at.fhtw.swen2.tutorial.service.dto.TourLog;
+import at.fhtw.swen2.tutorial.service.mapper.TourLogMapper;
 import at.fhtw.swen2.tutorial.service.mapper.TourMapper;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,9 @@ public class TourServiceImpl implements TourService {
 
     @Autowired
     private TourMapper tourMapper;
+
+    @Autowired
+    private TourLogMapper tourLogMapper;
 
     @Override
     public List<Tour> getList() {
@@ -48,4 +54,5 @@ public class TourServiceImpl implements TourService {
     public void delete(Tour tour) {
         tourRepository.delete(tourMapper.toEntity(tour));
     }
+
 }

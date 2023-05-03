@@ -90,5 +90,4 @@ public class AddTourWindowView implements Initializable {
         stage.close();
     }
 
-
 }

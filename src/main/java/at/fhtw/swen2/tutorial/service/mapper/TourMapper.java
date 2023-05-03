@@ -42,7 +42,9 @@ public class TourMapper extends AbstractMapper<TourEntity, Tour> {
         if (tourLogEntities != null && !tourLogEntities.isEmpty()) {
             tourLogEntities.forEach(tourLogEntity -> {
                 tourLogEntity.setTour(null);
-                tour.addTourLog(tourLogMapper.fromEntity(tourLogEntity));
+                TourLog tourLog = tourLogMapper.fromEntity(tourLogEntity);
+                tourLog.setTour(tour);
+                tour.addTourLog(tourLog);
             });
         }
 
@@ -71,7 +73,9 @@ public class TourMapper extends AbstractMapper<TourEntity, Tour> {
         if (tourLogs != null && !tourLogs.isEmpty()){
             tourLogs.forEach(tourLog -> {
                 tourLog.setTour(null);
-                tourEntity.addTourLog(tourLogMapper.toEntity(tourLog));
+                TourLogEntity tourLogEntity = tourLogMapper.toEntity(tourLog);
+                tourLogEntity.setTour(tourEntity);
+                tourEntity.addTourLog(tourLogEntity);
             });
         }
         return tourEntity;

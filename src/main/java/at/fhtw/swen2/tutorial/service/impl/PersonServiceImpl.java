@@ -34,4 +34,8 @@ public class PersonServiceImpl implements PersonService {
         return personMapper.fromEntity(entity);
     }
 
+    @Override
+    public Person findByName(String name) {
+        return personMapper.fromEntity(personRepository.findByName(name));
+    }
 }

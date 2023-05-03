@@ -50,4 +50,5 @@ public class TourLogServiceImpl implements TourLogService {
     public List<TourLog> findByTourId(Long id) {
         return tourLogMapper.fromEntity(tourLogRepository.findByTourId(id));
     }
+
 }

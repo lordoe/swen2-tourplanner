@@ -13,9 +13,6 @@ import org.springframework.stereotype.Component;
 public class AddTourWindowViewModel {
 
     @Autowired
-    private TourMapper tourMapper;
-
-    @Autowired
     private TourService tourService;
 
     @Autowired

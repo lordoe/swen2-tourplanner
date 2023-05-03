@@ -107,7 +107,7 @@ public class TourListViewModel {
                 updateMessage("Loading data");
                 return masterData
                         .stream()
-                        .filter(value -> value.getName().toLowerCase().contains(searchText.toLowerCase()))
+                        .filter(value -> value.getName().toLowerCase().contains(searchText.toLowerCase()) || value.getDescription().toLowerCase().contains(searchText.toLowerCase()))
                         .collect(Collectors.toList());
             }
         };

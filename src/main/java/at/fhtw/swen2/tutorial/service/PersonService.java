@@ -11,5 +11,5 @@ public interface PersonService {
     Person addNew(Person person);
 
     // erweitern mit parameter create new service
-
+    Person findByName(String name);
 }

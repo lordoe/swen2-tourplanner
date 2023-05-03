@@ -53,7 +53,10 @@ public class TourLogListViewModel {
                 updateMessage("Loading data");
                 return masterData
                         .stream()
-                        .filter(value -> value.getComment().toLowerCase().contains(searchText.toLowerCase()))
+                        .filter(value -> value.getComment().toLowerCase().contains(searchText.toLowerCase())
+                                || value.getId().toString().contains(searchText)
+                                || value.getDifficulty().difficulty.contains(searchText)
+                        )
                         .collect(Collectors.toList());
             }
         };
