@@ -50,6 +50,14 @@ public class TourLogServiceImpl implements TourLogService {
     }
 
     @Override
+    public TourLog update(TourLog tourLog) {
+        if(tourLog == null){
+            return null;
+        }
+        return tourLogMapper.fromEntity(tourLogRepository.save(tourLogMapper.toEntity(tourLog)));
+    }
+
+    @Override
     public List<TourLog> findByTourId(Long id) {
         return tourLogMapper.fromEntity(tourLogRepository.findByTourId(id));
     }

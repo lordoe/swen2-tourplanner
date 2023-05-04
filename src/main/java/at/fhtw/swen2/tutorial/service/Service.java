@@ -7,4 +7,5 @@ public interface Service<T> {
     T addNew(T t);
     T findById(Long id);
     void delete(T t);
+    T update(T t);
 }

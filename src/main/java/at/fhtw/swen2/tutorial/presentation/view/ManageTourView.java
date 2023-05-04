@@ -1,7 +1,6 @@
 package at.fhtw.swen2.tutorial.presentation.view;
 
 import at.fhtw.swen2.tutorial.presentation.ViewManager;
-import at.fhtw.swen2.tutorial.presentation.viewmodel.AddTourWindowViewModel;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourListViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,7 +34,7 @@ public class ManageTourView implements Initializable {
     @FXML
     private Button deleteTourButton;
     @FXML
-    public Button editTourButton;
+    public Button tourInfoButton;
     @FXML
     private Label selectedTour;
     @FXML
@@ -96,6 +95,22 @@ public class ManageTourView implements Initializable {
         }
     }
 
-    public void editTourButtonAction(ActionEvent actionEvent) {
+    public void tourInfoButtonAction(ActionEvent actionEvent) {
+        if(tourListViewModel.getSelected() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No Tour selected");
+            alert.setContentText("Please select a Tour to view");
+            alert.showAndWait();
+            return;
+        }
+        try {
+            Stage stage = new Stage();
+            Parent root1 = viewManager.load("at/fhtw/swen2/tutorial/presentation/view/TourDetailsWindow.fxml", stage);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }

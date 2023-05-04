@@ -61,28 +61,18 @@ public class AddTourWindowView implements Initializable {
         descriptionTextField.textProperty().bindBidirectional(addTourWindowViewModel.descriptionStringProperty());
     }
 
-    public void confirmTourButtonAction(ActionEvent event)  {
-        if(tourNameTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || toTextField.getText().isEmpty() || fromTextField.getText().isEmpty() ){
+    public void confirmTourButtonAction(ActionEvent event) {
+        Tour added = addTourWindowViewModel.addTour();
+        if (added == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Missing information");
-            alert.setContentText("Please insert the missing data for the Tour");
+            alert.setHeaderText("Invalid Tour");
+            alert.setContentText("Please fill in all fields!");
             alert.showAndWait();
-            return;
+        } else {
+            Stage stage = (Stage) confirmTourButton.getScene().getWindow();
+            stage.close();
         }
-        Tour tour = Tour.builder()
-                .name(tourNameTextField.getText())
-                .description(descriptionTextField.getText())
-                .from(fromTextField.getText())
-                .to(toTextField.getText())
-                .distance(33.)
-                .estimatedTime(33.)
-                .transportType("foot")
-                .routeInformation("link")
-                .build();
-        addTourWindowViewModel.addTour(tour);
-        Stage stage = (Stage) confirmTourButton.getScene().getWindow();
-        stage.close();
     }
 
     public void cancelTourButtonAction(ActionEvent event){

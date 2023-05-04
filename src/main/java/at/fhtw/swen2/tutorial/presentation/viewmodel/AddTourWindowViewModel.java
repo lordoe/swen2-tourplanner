@@ -23,10 +23,21 @@ public class AddTourWindowViewModel {
     private final SimpleStringProperty toString = new SimpleStringProperty("");
     private final SimpleStringProperty descriptionString = new SimpleStringProperty("");
 
-    public void addTour(Tour tour) {
-        //  logger.debug("User tries to add a tour to the database; Tour name: " + tour.getName());
-        Tour savedTour = tourService.addNew(tour);
+    public Tour addTour() {
+        if(nameString.getValue().isEmpty() || fromString.getValue().isEmpty()
+                || toString.getValue().isEmpty() || descriptionString.getValue().isEmpty()){
+            return null;
+        }
+        Tour newTour = Tour.builder()
+                .name(nameString.getValue())
+                .from(fromString.getValue())
+                .to(toString.getValue())
+                .description(descriptionString.getValue())
+                .build();
+
+        Tour savedTour = tourService.addNew(newTour);
         tourListViewModel.addItem(savedTour);
+        return savedTour;
     }
 
     public SimpleStringProperty nameStringProperty() {

@@ -1,16 +1,19 @@
 package at.fhtw.swen2.tutorial.presentation.view;
 
+import at.fhtw.swen2.tutorial.presentation.ViewManager;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourListViewModel;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourLogListViewModel;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -26,6 +29,8 @@ public class TourListView implements Initializable {
     private TourListViewModel tourListViewModel;
     @Autowired
     private TourLogListViewModel tourLogListViewModel;
+    @Autowired
+    private ViewManager viewManager;
     @FXML
     public TableView tableView = new TableView<>();
     @FXML
@@ -53,12 +58,15 @@ public class TourListView implements Initializable {
             row.setOnMouseClicked(event -> {
                 if(! row.isEmpty()){
                     Tour rowData = row.getItem();
-                    if(event.getClickCount() == 2){
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("TOUR INFO");
-                        alert.setHeaderText("Info about Tour");
-                        alert.setContentText(rowData.toString());
-                        alert.showAndWait();
+                    if(event.getClickCount() == 2 && tourListViewModel.getSelected() != null){
+                        try {
+                            Stage stage = new Stage();
+                            Parent root1 = viewManager.load("at/fhtw/swen2/tutorial/presentation/view/TourDetailsWindow.fxml", stage);
+                            stage.setScene(new Scene(root1));
+                            stage.show();
+                        } catch(Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                     // select tour for further processing
                     tourListViewModel.select(rowData);
