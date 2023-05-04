@@ -35,6 +35,8 @@ public class ManageTourView implements Initializable {
     @FXML
     private Button deleteTourButton;
     @FXML
+    public Button editTourButton;
+    @FXML
     private Label selectedTour;
     @FXML
     private Button searchTourButton;
@@ -92,5 +94,8 @@ public class ManageTourView implements Initializable {
         if (result.get() == ButtonType.OK){
             tourListViewModel.deleteSelectedTour();
         }
+    }
+
+    public void editTourButtonAction(ActionEvent actionEvent) {
     }
 }

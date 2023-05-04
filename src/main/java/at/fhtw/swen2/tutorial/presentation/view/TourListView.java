@@ -5,6 +5,7 @@ import at.fhtw.swen2.tutorial.presentation.viewmodel.TourLogListViewModel;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -52,6 +53,13 @@ public class TourListView implements Initializable {
             row.setOnMouseClicked(event -> {
                 if(! row.isEmpty()){
                     Tour rowData = row.getItem();
+                    if(event.getClickCount() == 2){
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("TOUR INFO");
+                        alert.setHeaderText("Info about Tour");
+                        alert.setContentText(rowData.toString());
+                        alert.showAndWait();
+                    }
                     // select tour for further processing
                     tourListViewModel.select(rowData);
                     // show tourLogs

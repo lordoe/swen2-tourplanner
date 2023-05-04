@@ -43,6 +43,9 @@ public class TourLogServiceImpl implements TourLogService {
 
     @Override
     public void delete(TourLog tourLog) {
+        if(tourLog == null){
+            return;
+        }
         tourLogRepository.delete(tourLogMapper.toEntity(tourLog));
     }
 

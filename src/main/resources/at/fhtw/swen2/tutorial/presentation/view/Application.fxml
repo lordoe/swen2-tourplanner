@@ -44,16 +44,13 @@
                         <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="220">
                            <children>
                                <fx:include source="ManageTour.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                               <fx:include source="TourList.fxml" />
+                               <fx:include source="TourList.fxml" AnchorPane.topAnchor="130.0"/>
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="319.0" prefWidth="542.0">
                            <children>
-                               <fx:include source="Manage_tourLog.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                           </children>
-                          <children>
-                              <fx:include source="TourLogList.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
-                              <VBox layoutX="26.0" layoutY="59.0" prefHeight="200.0" prefWidth="531.0" />
+                               <fx:include source="ManageTourLog.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <fx:include source="TourLogList.fxml" AnchorPane.topAnchor="100.0" />
                           </children>
                       </AnchorPane>
                     </items>

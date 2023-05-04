@@ -35,15 +35,8 @@ public class TourListViewModel {
     private final SimpleStringProperty searchString = new SimpleStringProperty();
 
     public void select(Tour rowData) {
-        if(selected == rowData){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("TOUR INFO");
-            alert.setHeaderText("Info about Tour");
-            alert.setContentText(selected.toString());
-            alert.showAndWait();
-        }
         this.selected = rowData;
-        setSelectedTourName(" -> " + rowData.getName());
+        setSelectedTourName(" " + rowData.getName());
         System.out.println(selectedTourName);
     }
 
@@ -73,12 +66,11 @@ public class TourListViewModel {
     }
 
     public void deleteSelectedTour(){
-        if(selected == null){
-            return;
-        }
         tourService.delete(selected);
         tourListItems.remove(selected);
-        tourLogListViewModel.clearItems();
+        masterData.remove(selected);
+        tourLogListViewModel.removeLogsOfTour(selected);
+        tourLogListViewModel.filterList("");
         setSelectedTourName(" deleted " + selected.getName());
         selected = null;
     }

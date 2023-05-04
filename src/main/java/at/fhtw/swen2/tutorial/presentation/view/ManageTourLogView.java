@@ -4,14 +4,12 @@ package at.fhtw.swen2.tutorial.presentation.view;
 import at.fhtw.swen2.tutorial.presentation.ViewManager;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.SearchTourLogViewModel;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourListViewModel;
+import at.fhtw.swen2.tutorial.presentation.viewmodel.TourLogListViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
@@ -19,12 +17,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 @Scope("prototype")
 @Slf4j
 public class ManageTourLogView {
 
     public static final int PAGE_ITEMS_COUNT = 10;
+
 
     @Autowired
     private ViewManager viewManager;
@@ -35,6 +36,9 @@ public class ManageTourLogView {
     @Autowired
     private TourListViewModel tourListViewModel;
 
+    @Autowired
+    private TourLogListViewModel tourLogListViewModel;
+
     @FXML
     private TextField searchField;
     @FXML
@@ -42,15 +46,30 @@ public class ManageTourLogView {
     @FXML
     private Label searchLabel;
     @FXML
-    private Button addTourLogButton;
-
+    public Label selectedTourLog;
+    @FXML
+    public Button addTourLogButton;
+    @FXML
+    public Button deleteTourLogButton;
+    @FXML
+    public Button editTourLogButton;
+    @FXML
+    public Button showAllTourLogsButton;
     @FXML
     private void initialize() {
 
         searchField.textProperty().bindBidirectional(searchTourLogViewModel.searchStringProperty());
+        selectedTourLog.textProperty().bind(tourLogListViewModel.selectedTourLogNameProperty());
 
         // search panel
         searchButton.setOnAction(event -> loadData());
+
+        // buttons
+        addTourLogButton.setOnAction(this::addTourLogButtonAction);
+        deleteTourLogButton.setOnAction(this::deleteTourLogButtonAction);
+        editTourLogButton.setOnAction(this::editTourLogButtonAction);
+        showAllTourLogsButton.setOnAction(this::showAllTourLogsButtonAction);
+
         searchButton.setStyle("-fx-background-color: slateblue; -fx-text-fill: white;");
         searchField.setOnKeyPressed(event -> {
             if (event.getCode().equals(KeyCode.ENTER)) {
@@ -83,5 +102,32 @@ public class ManageTourLogView {
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void deleteTourLogButtonAction(ActionEvent actionEvent) {
+        if(tourLogListViewModel.getSelected() == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No TourLog selected");
+            alert.setContentText("Please select a TourLog to delete");
+            alert.showAndWait();
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText("You are about to delete Log: " + tourLogListViewModel.getSelected().getId());
+        alert.setContentText("Cannot be undone. Are you sure?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            tourLogListViewModel.deleteSelectedTourLog();
+        }
+    }
+
+    public void editTourLogButtonAction(ActionEvent actionEvent) {
+    }
+
+    public void showAllTourLogsButtonAction(ActionEvent actionEvent) {
+        tourLogListViewModel.filterList("");
     }
 }

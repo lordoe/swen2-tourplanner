@@ -19,15 +19,14 @@ public class AddTourLogWindowViewModel {
     @Autowired
     private TourListViewModel tourListViewModel;
 
-    public TourLog addTourLog(TourLog tourLog) {
+    public void addTourLog(TourLog tourLog) {
         Tour selectedTour = tourListViewModel.getSelected();
         if(selectedTour == null || tourLog == null) {
-            return null;
+            return;
         }
         tourLog.setTourId(selectedTour.getId());
         TourLog saved = tourLogService.addNew(tourLog);
-        tourLogListViewModel.addItem(saved, selectedTour);
+        tourLogListViewModel.addItem(saved);
         tourLogListViewModel.showLogsOfTour(selectedTour);
-        return null;
     }
 }

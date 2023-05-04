@@ -30,9 +30,24 @@ public class DatabaseInitializer implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         // add some tours
-        Tour one = tourService.addNew(Tour.builder().name("TOUR1").from("Scheibs").to("Nebraska").build());
-        Tour two = tourService.addNew(Tour.builder().name("Achterbahn").from("Wien").to("New York").build());
-        Tour three = tourService.addNew(Tour.builder().name("Hatscher").from("Hier").to("Dort").build());
+        Tour one = tourService.addNew(Tour.builder()
+                .name("TOUR1")
+                .from("Scheibs")
+                .to("Nebraska")
+                .transportType("car")
+                .build());
+        Tour two = tourService.addNew(Tour.builder()
+                .name("Achterbahn")
+                .from("Wien")
+                .to("Graz")
+                .transportType("train")
+                .build());
+        Tour three = tourService.addNew(Tour.builder()
+                .name("Hatscher")
+                .from("Hier")
+                .to("Dort")
+                .transportType("foot")
+                .build());
 
         // add some tour logs
         tourLogService.addNew(TourLog.builder().dateTime(new Date()).comment("super").rating(4).difficulty(Difficulty.EASY).TourId(one.getId()).build());
@@ -47,11 +62,5 @@ public class DatabaseInitializer implements InitializingBean {
         tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.MARCH,20)).comment("entspannt").rating(9).difficulty(Difficulty.MEDIUM).TourId(three.getId()).build());
         tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.MARCH,11)).comment("grausig").rating(12).difficulty(Difficulty.MEDIUM).TourId(three.getId()).build());
 
-        // DEBUG
-        // in debug mode, it saves the correct tour id, but when running normally it is null
-        System.out.println("of tour one:");
-        System.out.println(tourLogService.findByTourId(one.getId()));
-        System.out.println("all:");
-        System.out.println(tourLogService.getList());
     }
 }

@@ -12,8 +12,7 @@
 <children>
         <VBox fx:id="dataContainer"
               AnchorPane.leftAnchor="5.0"
-              AnchorPane.rightAnchor="5.0"
-              AnchorPane.topAnchor="25.0"> <!-- space from top because of feedbackText in newPerson(Tour) View -->
+              AnchorPane.rightAnchor="5.0"> <!-- space from top because of feedbackText in newPerson(Tour) View -->
         </VBox>
 </children>
 </AnchorPane>

@@ -20,11 +20,14 @@
          <TextField fx:id="searchTourField" />
          <Button fx:id="searchTourButton" text="find"/>
       </HBox>
+       <HBox>
+       <Text>selected: </Text>
+       <Label fx:id="selectedTour" />
+       </HBox>
       <HBox prefHeight="0.0" prefWidth="184.0">
-            <Text text="Tour" />
             <Button fx:id="addTourButton" mnemonicParsing="false" onAction="#addTourButtonAction" text="+" />
             <Button fx:id="deleteTourButton" mnemonicParsing="false" onAction="#deleteTourButtonAction" text="-" />
-            <Label fx:id="selectedTour" />
+            <Button fx:id="editTourButton" mnemonicParsing="false" onAction="#editTourButtonAction" text="edit" />
       </HBox>
    </children>
    <padding>

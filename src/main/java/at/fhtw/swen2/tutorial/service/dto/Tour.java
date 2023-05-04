@@ -22,16 +22,14 @@ public class Tour {
 
     @Override
     public String toString() {
-        return "Tour{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", from='" + from + '\'' +
-                ", to='" + to + '\'' +
-                ", transportType='" + transportType + '\'' +
-                ", distance=" + distance +
-                ", estimatedTime=" + estimatedTime +
-                ", routeInformation='" + routeInformation + '\'' +
-                '}';
+        return "Id: " + id + "\n" +
+                "Name: '" + name + "\n'" +
+                "Description: '" + description + "\n" +
+                "From: '" + from + "\n" +
+                "To: '" + to + "\n" +
+                "Transport type: '" + transportType + "\n" +
+                "Distance: " + distance + "\n" +
+                "Estimated time: " + estimatedTime + "\n" +
+                "Information: " + routeInformation;
     }
 }

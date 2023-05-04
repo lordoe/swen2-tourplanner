@@ -1,9 +1,11 @@
 package at.fhtw.swen2.tutorial.presentation.view;
 
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourLogListViewModel;
+import at.fhtw.swen2.tutorial.service.dto.TourLog;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
@@ -27,7 +29,7 @@ public class TourLogListView implements Initializable{
     private VBox dataContainer;
     @Override
     public void initialize(URL location, ResourceBundle rb){
-        tableView.setItems(tourLogListViewModel.gettourLogListListItems());
+        tableView.setItems(tourLogListViewModel.getTourLogListListItems());
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         TableColumn id = new TableColumn("ID");
@@ -44,6 +46,19 @@ public class TourLogListView implements Initializable{
 
         dataContainer.getChildren().add(tableView);
         tourLogListViewModel.initList();
+
+        tableView.setRowFactory(tv -> {
+            TableRow<TourLog> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty()) {
+                    TourLog rowData = row.getItem();
+                    tourLogListViewModel.select(rowData);
+                }
+            });
+            return row;
+        });
+
+
     }
 
 }
