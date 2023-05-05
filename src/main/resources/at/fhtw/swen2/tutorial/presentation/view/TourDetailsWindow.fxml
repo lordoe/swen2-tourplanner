@@ -4,10 +4,12 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="486.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.fhtw.swen2.tutorial.presentation.view.TourDetailsView">
+<AnchorPane prefHeight="787.0" prefWidth="823.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.fhtw.swen2.tutorial.presentation.view.TourDetailsView">
    <children>
       <Label fx:id="titleLabel" alignment="CENTER" layoutX="234.0" layoutY="33.0" prefHeight="27.0" prefWidth="132.0" text="Tour Details" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="234.0">
          <font>
@@ -37,16 +39,21 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="descriptionTextField" alignment="TOP_LEFT" layoutX="35.0" layoutY="265.0" prefHeight="100.0" prefWidth="550.0" promptText="Enter tour description" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
-      <Label layoutX="25.0" layoutY="376.0" text="Transport Type" AnchorPane.leftAnchor="25.0">
+      <TextField fx:id="descriptionTextField" alignment="TOP_LEFT" layoutX="35.0" layoutY="265.0" prefHeight="63.0" prefWidth="773.0" promptText="Enter tour description" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+      <Label layoutX="26.0" layoutY="341.0" text="Transport Type" AnchorPane.leftAnchor="26.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="transportModeCheckBox" layoutX="26.0" layoutY="396.0" prefWidth="150.0" AnchorPane.leftAnchor="26.0" />
-     <Button fx:id="confirmTourButton" layoutX="529.0" layoutY="450.0" mnemonicParsing="false" text="save" AnchorPane.leftAnchor="529.0" />
-      <Button fx:id="cancelTourButton" layoutX="25.0" layoutY="450.0" mnemonicParsing="false" text="close" AnchorPane.rightAnchor="518.0" />
-      <Button fx:id="editTourButton" layoutX="279.0" layoutY="450.0" mnemonicParsing="false" text="edit" />
-      <Button fx:id="showRouteButton" layoutX="485.0" layoutY="396.0" mnemonicParsing="false" text="show Route" />
+      <ChoiceBox fx:id="transportModeCheckBox" layoutX="26.0" layoutY="368.0" prefWidth="150.0" AnchorPane.leftAnchor="26.0" />
+     <Button fx:id="confirmTourButton" layoutX="752.0" layoutY="747.0" mnemonicParsing="false" text="save" AnchorPane.leftAnchor="752.0" />
+      <Button fx:id="cancelTourButton" layoutX="26.0" layoutY="747.0" mnemonicParsing="false" text="close" AnchorPane.rightAnchor="747.0" />
+      <Button fx:id="editTourButton" layoutX="391.0" layoutY="747.0" mnemonicParsing="false" text="edit" />
+      <Button fx:id="showRouteButton" layoutX="696.0" layoutY="361.0" mnemonicParsing="false" text="show Route" />
+      <ImageView fx:id="imageView" fitHeight="320.0" fitWidth="773.0" layoutX="23.0" layoutY="412.0" pickOnBounds="true">
+         <image>
+            <Image fx:id="image" url="@../../../../../../maps/London_Paris.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

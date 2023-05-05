@@ -3,13 +3,17 @@ package at.fhtw.swen2.tutorial.presentation.view;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.AddTourWindowViewModel;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourDetailsViewModel;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourListViewModel;
+import at.fhtw.swen2.tutorial.service.MapService;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
+import at.fhtw.swen2.tutorial.service.impl.MapServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -21,6 +25,8 @@ public class TourDetailsView {
 
     @Autowired
     private TourDetailsViewModel tourDetailsViewModel;
+    @Autowired
+    private MapService mapService;
 
     public javafx.scene.control.Label titleLabel;
 
@@ -48,6 +54,10 @@ public class TourDetailsView {
     public Button editTourButton;
     @FXML
     public Button showRouteButton;
+    @FXML
+    public Image image;
+    @FXML
+    public ImageView imageView;
 
     private void disableFields() {
         tourNameTextField.setDisable(true);
@@ -82,6 +92,8 @@ public class TourDetailsView {
         fromTextField.textProperty().bindBidirectional(tourDetailsViewModel.fromStringProperty());
         toTextField.textProperty().bindBidirectional(tourDetailsViewModel.toStringProperty());
         descriptionTextField.textProperty().bindBidirectional(tourDetailsViewModel.descriptionStringProperty());
+
+        imageView.imageProperty().bindBidirectional(tourDetailsViewModel.imageProperty());
 
         // Buttons
         editTourButton.setOnAction(this::enableFields);

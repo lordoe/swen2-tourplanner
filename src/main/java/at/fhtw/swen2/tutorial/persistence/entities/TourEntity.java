@@ -35,6 +35,7 @@ public class TourEntity {
     // when their associated TourEntity object is persisted, updated or deleted
     // https://www.baeldung.com/jpa-cascade-types
     private List<TourLogEntity> tourLogs;
+    private String imagePath;
 
     /*
     * override tostring method to avoid infinite recursion

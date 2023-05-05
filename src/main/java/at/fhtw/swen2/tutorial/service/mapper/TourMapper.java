@@ -15,8 +15,6 @@ import java.util.List;
 @Component
 public class TourMapper extends AbstractMapper<TourEntity, Tour> {
 
-    //TODO:: find schönere Lösung
-
     @Autowired
     @Lazy
     private TourLogMapper tourLogMapper;
@@ -39,6 +37,7 @@ public class TourMapper extends AbstractMapper<TourEntity, Tour> {
                 .distance(entity.getDistance())
                 .estimatedTime(entity.getEstimatedTime())
                 .routeInformation(entity.getRouteInformation())
+                .imagePath(entity.getImagePath())
                 .build();
 
         return tour;
@@ -60,6 +59,7 @@ public class TourMapper extends AbstractMapper<TourEntity, Tour> {
                 .estimatedTime(tour.getEstimatedTime())
                 .routeInformation(tour.getRouteInformation())
                 .tourLogs(tourLogRepository.findByTourId(tour.getId()))
+                .imagePath(tour.getImagePath())
                 .build();
 
         return tourEntity;

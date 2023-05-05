@@ -19,6 +19,7 @@ public class Tour {
     private Double distance;
     private Double estimatedTime;
     private String routeInformation;
+    private String imagePath;
 
     @Override
     public String toString() {

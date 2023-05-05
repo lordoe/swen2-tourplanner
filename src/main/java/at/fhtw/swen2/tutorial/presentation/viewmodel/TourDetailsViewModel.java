@@ -2,9 +2,18 @@ package at.fhtw.swen2.tutorial.presentation.viewmodel;
 
 import at.fhtw.swen2.tutorial.service.TourService;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javafx.scene.image.Image;
+
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 @Component
 public class TourDetailsViewModel {
@@ -19,6 +28,7 @@ public class TourDetailsViewModel {
     private final SimpleStringProperty fromString = new SimpleStringProperty("");
     private final SimpleStringProperty toString = new SimpleStringProperty("");
     private final SimpleStringProperty descriptionString = new SimpleStringProperty("");
+    private final ObjectProperty<Image> imageProperty = new SimpleObjectProperty<>();
 
     public void init(){
         Tour selectedTour;
@@ -29,6 +39,13 @@ public class TourDetailsViewModel {
         fromString.setValue(selectedTour.getFrom());
         toString.setValue(selectedTour.getTo());
         descriptionString.setValue(selectedTour.getDescription());
+
+        // for debugging print current path
+        //System.err.println("Current path: " + System.getProperty("user.dir"));
+        //System.out.println(Files.exists(Path.of("/home/lorenz/fh/4_sem/swen/swen2-tourplanner/src/main/resources/maps/Prag_Linz.png")));
+        File file = new File(selectedTour.getImagePath());
+        Image image = new Image(file.toURI().toString());
+        imageProperty.set(image);
     }
 
     public SimpleStringProperty nameStringProperty() {
@@ -40,6 +57,7 @@ public class TourDetailsViewModel {
     public SimpleStringProperty toStringProperty() { return toString; }
 
     public SimpleStringProperty descriptionStringProperty() { return descriptionString; }
+    public ObjectProperty<Image> imageProperty() {return imageProperty;}
 
     public Tour updateTour() {
         if(nameString.getValue() == null || nameString.getValue().isEmpty()
@@ -61,4 +79,5 @@ public class TourDetailsViewModel {
         tourListViewModel.updateTour(updated);
         return updated;
     }
+
 }
