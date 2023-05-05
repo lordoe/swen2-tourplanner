@@ -43,6 +43,9 @@ public class TourDetailsViewModel {
         // for debugging print current path
         //System.err.println("Current path: " + System.getProperty("user.dir"));
         //System.out.println(Files.exists(Path.of("/home/lorenz/fh/4_sem/swen/swen2-tourplanner/src/main/resources/maps/Prag_Linz.png")));
+        if(selectedTour.getImagePath() == null || !Files.exists(Path.of(selectedTour.getImagePath()))){
+            return;
+        }
         File file = new File(selectedTour.getImagePath());
         Image image = new Image(file.toURI().toString());
         imageProperty.set(image);
