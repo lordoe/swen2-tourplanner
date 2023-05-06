@@ -1,8 +1,7 @@
 package at.fhtw.swen2.tutorial.presentation.view;
 
-import at.fhtw.swen2.tutorial.presentation.utils.MissingParamException;
+import at.fhtw.swen2.tutorial.presentation.utils.InvalidParamException;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.AddTourWindowViewModel;
-import at.fhtw.swen2.tutorial.service.dto.Tour;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -56,6 +55,7 @@ public class AddTourWindowView implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle rb) {
+        addTourWindowViewModel.init();
         tourNameTextField.textProperty().bindBidirectional(addTourWindowViewModel.nameStringProperty());
         fromTextField.textProperty().bindBidirectional(addTourWindowViewModel.fromStringProperty());
         toTextField.textProperty().bindBidirectional(addTourWindowViewModel.toStringProperty());
@@ -64,17 +64,18 @@ public class AddTourWindowView implements Initializable {
 
     public void confirmTourButtonAction(ActionEvent event) {
         try {
+            confirmTourButton.setText("loading...");
             addTourWindowViewModel.addTour();
-        } catch (MissingParamException e) {
+            Stage stage = (Stage) confirmTourButton.getScene().getWindow();
+            stage.close();
+        } catch (InvalidParamException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Invalid Tour");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
-            return;
+            confirmTourButton.setText("save");
         }
-        Stage stage = (Stage) confirmTourButton.getScene().getWindow();
-        stage.close();
     }
 
     public void cancelTourButtonAction(ActionEvent event){

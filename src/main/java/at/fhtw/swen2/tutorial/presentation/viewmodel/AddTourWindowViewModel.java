@@ -1,6 +1,6 @@
 package at.fhtw.swen2.tutorial.presentation.viewmodel;
 
-import at.fhtw.swen2.tutorial.presentation.utils.MissingParamException;
+import at.fhtw.swen2.tutorial.presentation.utils.InvalidParamException;
 import at.fhtw.swen2.tutorial.service.MapService;
 import at.fhtw.swen2.tutorial.service.TourService;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
@@ -25,14 +25,21 @@ public class AddTourWindowViewModel {
     private final SimpleStringProperty toString = new SimpleStringProperty("");
     private final SimpleStringProperty descriptionString = new SimpleStringProperty("");
 
-    public void addTour() throws MissingParamException {
+    public void init(){
+        nameString.setValue("");
+        fromString.setValue("");
+        toString.setValue("");
+        descriptionString.setValue("");
+    }
+
+    public void addTour() throws InvalidParamException {
         if(nameString.getValue().isEmpty() || fromString.getValue().isEmpty()
                 || toString.getValue().isEmpty() || descriptionString.getValue().isEmpty()){
-            throw new MissingParamException("Not all fields set");
+            throw new InvalidParamException("Not all fields set");
         }
         MapData mapData = mapService.getMap(fromString.getValue(), toString.getValue(), "fastest");
         if(mapData == null){
-            throw new MissingParamException("Route start or destination are not valid");
+            throw new InvalidParamException("Route start or destination are not valid");
         }
 
 

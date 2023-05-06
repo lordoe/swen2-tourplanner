@@ -25,8 +25,6 @@ public class TourDetailsView {
 
     @Autowired
     private TourDetailsViewModel tourDetailsViewModel;
-    @Autowired
-    private MapService mapService;
 
     public javafx.scene.control.Label titleLabel;
 
@@ -54,8 +52,6 @@ public class TourDetailsView {
     public Button editTourButton;
     @FXML
     public Button showRouteButton;
-    @FXML
-    public Image image;
     @FXML
     public ImageView imageView;
 
