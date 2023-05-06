@@ -34,6 +34,7 @@ public class DatabaseInitializer implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        /*
         // add some tours
         MapData mapData = mapService.getMap("Wien", "Rotterdam", "fastest");
         Tour one = tourService.addNew(Tour.builder()
@@ -84,6 +85,6 @@ public class DatabaseInitializer implements InitializingBean {
         tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.APRIL,1)).comment("mega").rating(11).difficulty(Difficulty.HARD).TourId(three.getId()).build());
         tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.MARCH,20)).comment("entspannt").rating(9).difficulty(Difficulty.MEDIUM).TourId(three.getId()).build());
         tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.MARCH,11)).comment("grausig").rating(12).difficulty(Difficulty.MEDIUM).TourId(three.getId()).build());
-
+        */
     }
 }

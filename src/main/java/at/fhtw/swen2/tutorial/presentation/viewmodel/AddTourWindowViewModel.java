@@ -1,13 +1,11 @@
 package at.fhtw.swen2.tutorial.presentation.viewmodel;
 
-import at.fhtw.swen2.tutorial.persistence.repositories.TourRepository;
+import at.fhtw.swen2.tutorial.presentation.utils.MissingParamException;
 import at.fhtw.swen2.tutorial.service.MapService;
 import at.fhtw.swen2.tutorial.service.TourService;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
-import at.fhtw.swen2.tutorial.service.mapper.TourMapper;
 import at.fhtw.swen2.tutorial.service.utils.MapData;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,12 +25,16 @@ public class AddTourWindowViewModel {
     private final SimpleStringProperty toString = new SimpleStringProperty("");
     private final SimpleStringProperty descriptionString = new SimpleStringProperty("");
 
-    public Tour addTour() {
+    public void addTour() throws MissingParamException {
         if(nameString.getValue().isEmpty() || fromString.getValue().isEmpty()
                 || toString.getValue().isEmpty() || descriptionString.getValue().isEmpty()){
-            return null;
+            throw new MissingParamException("Not all fields set");
         }
         MapData mapData = mapService.getMap(fromString.getValue(), toString.getValue(), "fastest");
+        if(mapData == null){
+            throw new MissingParamException("Route start or destination are not valid");
+        }
+
 
         Tour newTour = Tour.builder()
                 .name(nameString.getValue())
@@ -47,7 +49,6 @@ public class AddTourWindowViewModel {
 
         Tour savedTour = tourService.addNew(newTour);
         tourListViewModel.addItem(savedTour);
-        return savedTour;
     }
 
     public SimpleStringProperty nameStringProperty() {

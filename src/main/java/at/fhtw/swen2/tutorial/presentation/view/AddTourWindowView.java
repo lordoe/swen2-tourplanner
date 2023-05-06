@@ -1,5 +1,6 @@
 package at.fhtw.swen2.tutorial.presentation.view;
 
+import at.fhtw.swen2.tutorial.presentation.utils.MissingParamException;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.AddTourWindowViewModel;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
 import javafx.event.ActionEvent;
@@ -62,17 +63,18 @@ public class AddTourWindowView implements Initializable {
     }
 
     public void confirmTourButtonAction(ActionEvent event) {
-        Tour added = addTourWindowViewModel.addTour();
-        if (added == null) {
+        try {
+            addTourWindowViewModel.addTour();
+        } catch (MissingParamException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Invalid Tour");
-            alert.setContentText("Please fill in all fields!");
+            alert.setContentText(e.getMessage());
             alert.showAndWait();
-        } else {
-            Stage stage = (Stage) confirmTourButton.getScene().getWindow();
-            stage.close();
+            return;
         }
+        Stage stage = (Stage) confirmTourButton.getScene().getWindow();
+        stage.close();
     }
 
     public void cancelTourButtonAction(ActionEvent event){
