@@ -5,6 +5,7 @@ import at.fhtw.swen2.tutorial.persistence.entities.TourEntity;
 import at.fhtw.swen2.tutorial.persistence.repositories.PersonRepository;
 import at.fhtw.swen2.tutorial.persistence.repositories.TourRepository;
 import at.fhtw.swen2.tutorial.persistence.utils.Difficulty;
+import at.fhtw.swen2.tutorial.presentation.utils.TransportType;
 import at.fhtw.swen2.tutorial.service.MapService;
 import at.fhtw.swen2.tutorial.service.TourLogService;
 import at.fhtw.swen2.tutorial.service.TourService;
@@ -42,7 +43,7 @@ public class DatabaseInitializer implements InitializingBean {
                 .from("Wien")
                 .to("Rotterdam")
                 .description("Roadtrip from Vienna to Rotterdam")
-                .transportType("fastest")
+                .transportType(TransportType.FASTEST.toString())
                 .distance(mapData != null ? mapData.getDistance() : 0)
                 .estimatedTime(mapData != null ? mapData.getDuration() : 0)
                 .imagePath(mapData != null ? mapData.getImagePath() : null)
@@ -54,7 +55,7 @@ public class DatabaseInitializer implements InitializingBean {
                 .from("Wien")
                 .to("Graz")
                 .description("Achterbahn von Wien nach Graz")
-                .transportType("fastest")
+                .transportType(TransportType.FASTEST.toString())
                 .distance(mapData2 != null ? mapData2.getDistance() : 0)
                 .estimatedTime(mapData2 != null ? mapData2.getDuration() : 0)
                 .imagePath(mapData2 != null ? mapData2.getImagePath() : null)
@@ -66,7 +67,7 @@ public class DatabaseInitializer implements InitializingBean {
                 .from("Wien")
                 .to("Innsbruck")
                 .description("Hatscher von Wien nach Innsbruck")
-                .transportType("pedestrian")
+                .transportType(TransportType.PEDESTRIAN.toString())
                 .distance(mapData3 != null ? mapData3.getDistance() : 0)
                 .estimatedTime(mapData3 != null ? mapData3.getDuration() : 0)
                 .imagePath(mapData3 != null ? mapData3.getImagePath() : null)

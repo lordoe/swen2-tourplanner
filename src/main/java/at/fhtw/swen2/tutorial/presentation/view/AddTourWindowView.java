@@ -1,6 +1,7 @@
 package at.fhtw.swen2.tutorial.presentation.view;
 
 import at.fhtw.swen2.tutorial.presentation.utils.InvalidParamException;
+import at.fhtw.swen2.tutorial.presentation.utils.TransportType;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.AddTourWindowViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,7 +43,7 @@ public class AddTourWindowView implements Initializable {
     private TextField descriptionTextField;
 
     @FXML
-    private ChoiceBox transportModeCheckBox;
+    private ChoiceBox<TransportType> transportModeCheckBox;
 
     @FXML
     private Button confirmTourButton;
@@ -56,10 +57,14 @@ public class AddTourWindowView implements Initializable {
 
     public void initialize(URL location, ResourceBundle rb) {
         addTourWindowViewModel.init();
+
+        transportModeCheckBox.getItems().addAll(TransportType.values());
+
         tourNameTextField.textProperty().bindBidirectional(addTourWindowViewModel.nameStringProperty());
         fromTextField.textProperty().bindBidirectional(addTourWindowViewModel.fromStringProperty());
         toTextField.textProperty().bindBidirectional(addTourWindowViewModel.toStringProperty());
         descriptionTextField.textProperty().bindBidirectional(addTourWindowViewModel.descriptionStringProperty());
+        transportModeCheckBox.valueProperty().bindBidirectional(addTourWindowViewModel.transportTypeProperty());
     }
 
     public void confirmTourButtonAction(ActionEvent event) {

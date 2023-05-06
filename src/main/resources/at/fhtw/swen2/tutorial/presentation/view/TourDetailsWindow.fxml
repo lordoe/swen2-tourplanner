@@ -3,13 +3,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.ScrollPane?>
 <AnchorPane prefHeight="845.0" prefWidth="707.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.fhtw.swen2.tutorial.presentation.view.TourDetailsView">
    <children>
       <Label fx:id="titleLabel" alignment="CENTER" layoutX="234.0" layoutY="33.0" prefHeight="27.0" prefWidth="132.0" text="Tour Details" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="234.0">
@@ -51,9 +50,29 @@
       <Button fx:id="cancelTourButton" layoutX="26.0" layoutY="798.0" mnemonicParsing="false" text="close" AnchorPane.rightAnchor="631.0" />
       <Button fx:id="editTourButton" layoutX="333.0" layoutY="798.0" mnemonicParsing="false" text="edit" />
       <Button fx:id="showRouteButton" layoutX="588.0" layoutY="368.0" mnemonicParsing="false" text="show Route" />
-      <ScrollPane layoutX="28.0" layoutY="408.0" prefViewportWidth="635.0" prefViewportHeight="367.0" pannable="true">
+      <ScrollPane layoutX="28.0" layoutY="408.0" pannable="true" prefViewportHeight="367.0" prefViewportWidth="635.0">
          <ImageView fx:id="imageView" fitWidth="800.0" layoutX="25.0" layoutY="411.0" preserveRatio="true">
          </ImageView>
       </ScrollPane>
+      <Label layoutX="394.0" layoutY="121.0" text="Estimated time">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="394.0" layoutY="183.0" text="Distance">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="estimatedTime" layoutX="394.0" layoutY="144.0" >
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="distance" layoutX="394.0" layoutY="206.0" >
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
