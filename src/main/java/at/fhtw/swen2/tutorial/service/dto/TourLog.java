@@ -13,7 +13,7 @@ public class TourLog {
     private Date dateTime;
     private String comment;
     private Difficulty difficulty;
-    private Integer totalTime;
+    private Integer timeInMinutes;
     private Integer rating;
     private Long TourId;
     @Override
@@ -23,7 +23,7 @@ public class TourLog {
                 ", dateTime=" + dateTime +
                 ", comment='" + comment + '\'' +
                 ", difficulty=" + difficulty +
-                ", totalTime=" + totalTime +
+                ", totalTime=" + timeInMinutes +
                 ", rating=" + rating +
                 ", tourId=" + TourId +
                 '}';

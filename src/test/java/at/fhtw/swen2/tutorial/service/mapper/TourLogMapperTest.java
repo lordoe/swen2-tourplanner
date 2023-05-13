@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Date;
-import java.sql.Time;
-import java.time.DateTimeException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -26,7 +24,7 @@ class TourLogMapperTest {
     private TourService tourService;
 
     @Test
-    void tourLogfromEntityTest() {
+    void tourLogFromEntityTest() {
         // Arrange
         TourEntity tourEntity = TourEntity.builder().name("hello world").build();
         TourLogEntity tourLogEntity = TourLogEntity.builder()
@@ -47,7 +45,7 @@ class TourLogMapperTest {
         assertEquals(tourLogEntity.getComment(), tourLog.getComment());
         assertEquals(tourLogEntity.getId(),tourLog.getId());
         assertEquals(tourLogEntity.getRating(), tourLog.getRating());
-        assertEquals(tourLogEntity.getTotalTime(), tourLog.getTotalTime());
+        assertEquals(tourLogEntity.getTotalTime(), tourLog.getTimeInMinutes());
         assertEquals(tourLogEntity.getDifficulty(), tourLog.getDifficulty());
         assertEquals(tourLogEntity.getTour().getId(), tourLog.getTourId());
     }
@@ -59,7 +57,7 @@ class TourLogMapperTest {
         TourLog tourLog = TourLog.builder()
                 .id(7L)
                 .rating(19)
-                .totalTime(22)
+                .timeInMinutes(22)
                 .difficulty(Difficulty.EASY)
                 .dateTime(new Date(333))
                 .comment("testcase")
@@ -73,7 +71,7 @@ class TourLogMapperTest {
         assertEquals(tourLogEntity.getComment(), tourLog.getComment());
         assertEquals(tourLogEntity.getId(),tourLog.getId());
         assertEquals(tourLogEntity.getRating(), tourLog.getRating());
-        assertEquals(tourLogEntity.getTotalTime(), tourLog.getTotalTime());
+        assertEquals(tourLogEntity.getTotalTime(), tourLog.getTimeInMinutes());
         assertEquals(tourLogEntity.getDifficulty(), tourLog.getDifficulty());
         assertEquals(tourLogEntity.getTour().getId(), tourLog.getTourId());
         System.out.println(tourLogEntity);

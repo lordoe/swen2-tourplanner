@@ -24,7 +24,7 @@
             <children>
                 <Button fx:id="addTourLogButton" text="+"/>
                 <Button fx:id="deleteTourLogButton" text="-"/>
-                <Button fx:id="editTourLogButton" text="edit"/>
+                <Button fx:id="editTourLogButton" text="info"/>
             </children>
         </HBox>
     </VBox>

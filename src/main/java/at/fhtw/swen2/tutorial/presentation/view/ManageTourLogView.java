@@ -95,6 +95,7 @@ public class ManageTourLogView {
             return;
         }
         try {
+            tourLogListViewModel.unselect();
             Stage stage = new Stage();
             Parent root1 = viewManager.load("at/fhtw/swen2/tutorial/presentation/view/AddTourLogWindow.fxml", stage);
             stage.setScene(new Scene(root1));
@@ -125,6 +126,22 @@ public class ManageTourLogView {
     }
 
     public void editTourLogButtonAction(ActionEvent actionEvent) {
+        if(tourLogListViewModel.getSelected() == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No TourLog selected");
+            alert.setContentText("Please select a TourLog to edit");
+            alert.showAndWait();
+            return;
+        }
+        try {
+            Stage stage = new Stage();
+            Parent root1 = viewManager.load("at/fhtw/swen2/tutorial/presentation/view/AddTourLogWindow.fxml", stage);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void showAllTourLogsButtonAction(ActionEvent actionEvent) {

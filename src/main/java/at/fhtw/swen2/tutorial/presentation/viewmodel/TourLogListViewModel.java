@@ -101,4 +101,18 @@ public class TourLogListViewModel {
     public StringProperty selectedTourLogNameProperty() {
         return selectedTourLogName;
     }
+
+    public void updateItem(TourLog updated) {
+        if(updated == null) {
+            return;
+        }
+        int index = tourLogListItems.indexOf(selected);
+        tourLogListItems.set(index, updated);
+        masterData.set(index, updated);
+        selected = updated;
+    }
+
+    public void unselect() {
+        this.selected = null;
+    }
 }
