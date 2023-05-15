@@ -21,9 +21,10 @@ public class TourLogListViewModel {
     @Autowired
     private TourLogService tourLogService;
 
+    private Long tourIdFilter; // null = no filter, else filter in search by tourId
     private TourLog selected;
     private final SimpleStringProperty selectedTourLogName = new SimpleStringProperty();
-    private List<TourLog> masterData = new ArrayList<>();
+    private final List<TourLog> masterData = new ArrayList<>();
     private final ObservableList<TourLog> tourLogListItems = FXCollections.observableArrayList();
 
     public ObservableList<TourLog> getTourLogListListItems() {
@@ -44,10 +45,15 @@ public class TourLogListViewModel {
         tourLogService.getList().forEach(this::addItem);
     }
 
-    public void showLogsOfTour(Tour tour) {
-        filterList("KEYWORDTOURSEARCH_" + tour.getId().toString());
+    public void setTourIdFilter(Tour tour) {
+        tourIdFilter = tour.getId();
+        filterList("");
     }
 
+    public void clearTourIdFilter() {
+        tourIdFilter = null;
+        filterList("");
+    }
     public void filterList(String searchText){
         Task<List<TourLog>> task = new Task<>() {
             @Override
@@ -56,11 +62,10 @@ public class TourLogListViewModel {
                 return masterData
                         .stream()
                         .filter(value ->
-                                value.getComment().toLowerCase().contains(searchText.toLowerCase())
-                                || value.getId().toString().contains(searchText)
-                                || value.getDifficulty().difficulty.contains(searchText)
-                                        //tour search
-                                || searchText.contains("KEYWORDTOURSEARCH_") && value.getTourId().toString().equals(searchText.split("_")[1])
+                                (tourIdFilter == null || value.getTourId().equals(tourIdFilter)) &&
+                                    ( value.getComment().toLowerCase().contains(searchText.toLowerCase())
+                                    || value.getId().toString().contains(searchText)
+                                    || value.getDifficulty().difficulty.contains(searchText) )
                         )
                         .collect(Collectors.toList());
             }
@@ -100,16 +105,6 @@ public class TourLogListViewModel {
 
     public StringProperty selectedTourLogNameProperty() {
         return selectedTourLogName;
-    }
-
-    public void updateItem(TourLog updated) {
-        if(updated == null) {
-            return;
-        }
-        int index = tourLogListItems.indexOf(selected);
-        tourLogListItems.set(index, updated);
-        masterData.set(index, updated);
-        selected = updated;
     }
 
     public void unselect() {

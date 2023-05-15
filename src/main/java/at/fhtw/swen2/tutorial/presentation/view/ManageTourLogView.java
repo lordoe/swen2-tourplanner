@@ -145,6 +145,6 @@ public class ManageTourLogView {
     }
 
     public void showAllTourLogsButtonAction(ActionEvent actionEvent) {
-        tourLogListViewModel.filterList("");
+        tourLogListViewModel.clearTourIdFilter();
     }
 }

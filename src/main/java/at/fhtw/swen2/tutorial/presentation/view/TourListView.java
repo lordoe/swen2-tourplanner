@@ -71,7 +71,7 @@ public class TourListView implements Initializable {
                     // select tour for further processing
                     tourListViewModel.select(rowData);
                     // show tourLogs
-                    tourLogListViewModel.showLogsOfTour(rowData);
+                    tourLogListViewModel.setTourIdFilter(rowData);
                 }
             });
             return row;

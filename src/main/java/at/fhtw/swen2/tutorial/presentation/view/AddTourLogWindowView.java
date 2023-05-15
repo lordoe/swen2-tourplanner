@@ -73,7 +73,7 @@ public class AddTourLogWindowView {
         } catch (InvalidParamException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Invalid Tour");
+            alert.setHeaderText("Invalid Data");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
             confirmButton.setText("save");

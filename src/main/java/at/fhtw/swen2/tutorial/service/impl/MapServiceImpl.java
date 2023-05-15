@@ -42,6 +42,11 @@ public class MapServiceImpl implements MapService {
             pedestrian - Walking route; Avoids limited access roads; Ignores turn restrictions.
             bicycle - Will only use roads on which bicycling is appropriate.
          */
+        // create directory if not exists
+        Path dirPath = Paths.get("src/main/resources/maps");
+        if(!Files.exists(dirPath)){
+            Files.createDirectory(dirPath);
+        }
         // check if mapdata already exists at Path
         String metaDataPath = "src/main/resources/maps/." + from + "_" + to + "_" + transportType + ".json";
         Path path = Paths.get(metaDataPath);
