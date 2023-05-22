@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<h3 style="text-align: center; color: green">
+    <span th:text="${header}"></span>
+</h3>
+<table>
+    <thead>
+    <tr>
+        <th> ID </th>
+        <th> Name </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${persons.empty}">
+        <td colspan="2"> No Books Available </td>
+    </tr>
+    <tr th:each="person : ${persons}">
+        <td><span th:text="${person.id}"> Id </span></td>
+        <td><span th:text="${person.name}"> Name </span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
