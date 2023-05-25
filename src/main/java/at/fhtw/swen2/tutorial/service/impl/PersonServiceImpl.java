@@ -1,4 +1,4 @@
-package at.fhtw.swen2.tutorial.service.impl.database;
+package at.fhtw.swen2.tutorial.service.impl;
 
 import at.fhtw.swen2.tutorial.persistence.entities.PersonEntity;
 import at.fhtw.swen2.tutorial.persistence.repositories.PersonRepository;
@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 @Transactional
 @Primary
-public class PersonServiceDbImpl implements PersonService {
+public class PersonServiceImpl implements PersonService {
 
     @Autowired
     private PersonRepository personRepository;

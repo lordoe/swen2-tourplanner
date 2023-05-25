@@ -1,4 +1,4 @@
-package at.fhtw.swen2.tutorial.service.impl.database;
+package at.fhtw.swen2.tutorial.service.impl;
 
 import at.fhtw.swen2.tutorial.persistence.entities.TourLogEntity;
 import at.fhtw.swen2.tutorial.persistence.repositories.TourLogRepository;
@@ -14,7 +14,7 @@ import java.util.List;
 @org.springframework.stereotype.Service
 @Transactional
 @Primary
-public class TourLogServiceDbImpl implements TourLogService {
+public class TourLogServiceImpl implements TourLogService {
 
     @Autowired
     private TourLogRepository tourLogRepository;

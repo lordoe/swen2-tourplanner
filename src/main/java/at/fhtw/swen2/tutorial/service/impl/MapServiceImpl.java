@@ -1,4 +1,4 @@
-package at.fhtw.swen2.tutorial.service.impl.http;
+package at.fhtw.swen2.tutorial.service.impl;
 
 import at.fhtw.swen2.tutorial.service.MapService;
 import at.fhtw.swen2.tutorial.service.utils.MapData;
