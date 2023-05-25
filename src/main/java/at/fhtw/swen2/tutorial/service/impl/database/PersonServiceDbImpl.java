@@ -1,4 +1,4 @@
-package at.fhtw.swen2.tutorial.service.impl;
+package at.fhtw.swen2.tutorial.service.impl.database;
 
 import at.fhtw.swen2.tutorial.persistence.entities.PersonEntity;
 import at.fhtw.swen2.tutorial.persistence.repositories.PersonRepository;
@@ -6,6 +6,7 @@ import at.fhtw.swen2.tutorial.service.mapper.PersonMapper;
 import at.fhtw.swen2.tutorial.service.PersonService;
 import at.fhtw.swen2.tutorial.service.dto.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +14,8 @@ import java.util.List;
 
 @Service
 @Transactional
-public class PersonServiceImpl implements PersonService {
+@Primary
+public class PersonServiceDbImpl implements PersonService {
 
     @Autowired
     private PersonRepository personRepository;
