@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:controller="at.fhtw.swen2.tutorial.presentation.view.ManageTourLogView">
+    <children>
+    <VBox spacing="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" VBox.vgrow="ALWAYS">
+        <HBox>
+        <Label text="Search Log: "/>
+                <TextField fx:id="searchField" prefWidth="-1.0" HBox.hgrow="ALWAYS"/>
+                <Button fx:id="searchButton" text="find" prefWidth="-1.0" HBox.hgrow="ALWAYS"/>
+                <Label fx:id="searchLabel"/>
+                <Button fx:id="showAllTourLogsButton" text="show all"/>
+        </HBox>
+        <HBox id="HBox1">
+            <children>
+                <Label fx:id="selectedTourLog" />
+            </children>
+        </HBox>
+        <HBox id="HBox2" AnchorPane.topAnchor="30.0" >
+            <children>
+                <Button fx:id="addTourLogButton" text="+"/>
+                <Button fx:id="deleteTourLogButton" text="-"/>
+                <Button fx:id="editTourLogButton" text="info"/>
+            </children>
+        </HBox>
+    </VBox>
+    </children>
+</AnchorPane>
