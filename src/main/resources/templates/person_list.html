@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Page Title</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h3 {
+            text-align: center;
+            color: green;
+            margin-top: 20px;
+        }
+
+        .tour {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .tour-info {
+            margin-left: 20px;
+        }
+
+        .tour-image {
+            max-width: 100px;
+            max-height: 100px;
+        }
+    </style>
+</head>
+<body>
+<h3><span th:text="${header}"></span></h3>
+<div th:if="${tours.empty}">
+    No Tours Available
+</div>
+<div th:each="tour : ${tours}" class="tour">
+    <img class="tour-image" th:src="@{${tour.imagePath}}" />
+    <div class="tour-info">
+        <div>ID: <span th:text="${tour.id}">Id</span></div>
+        <div>Name: <span th:text="${tour.name}">Name</span></div>
+        <div>Description: <span th:text="${tour.description}">Description</span></div>
+        <div>From: <span th:text="${tour.from}">From</span></div>
+        <div>Transport Type: <span th:text="${tour.transportType}">Transport Type</span></div>
+        <div>Distance: <span th:text="${tour.distance}">Distance</span></div>
+        <div>Estimated Time: <span th:text="${tour.estimatedTime}">Estimated Time</span></div>
+        <div>Route Information: <span th:text="${tour.routeInformation}">Route Information</span></div>
+    </div>
+</div>
+</body>
+</html>

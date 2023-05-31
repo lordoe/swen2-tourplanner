@@ -3,6 +3,7 @@ package at.fhtw.swen2.tutorial.presentation.view;
 import at.fhtw.swen2.tutorial.presentation.utils.InvalidParamException;
 import at.fhtw.swen2.tutorial.presentation.utils.TransportType;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.AddTourWindowViewModel;
+import at.fhtw.swen2.tutorial.service.PdfGeneratorDemo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,6 +29,9 @@ public class AddTourWindowView implements Initializable {
 
     @Autowired
     private AddTourWindowViewModel addTourWindowViewModel;
+
+    @Autowired
+    private PdfGeneratorDemo pdfGeneratorDemo;
 
 
     @FXML
@@ -83,7 +87,8 @@ public class AddTourWindowView implements Initializable {
         }
     }
 
-    public void cancelTourButtonAction(ActionEvent event){
+    public void cancelTourButtonAction(ActionEvent event) throws Exception {
+        pdfGeneratorDemo.startDemo();
         Stage stage = (Stage) cancelTourButton.getScene().getWindow();
         stage.close();
     }
