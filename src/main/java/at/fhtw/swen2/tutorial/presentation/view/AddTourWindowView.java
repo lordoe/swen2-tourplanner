@@ -30,10 +30,6 @@ public class AddTourWindowView implements Initializable {
     @Autowired
     private AddTourWindowViewModel addTourWindowViewModel;
 
-    @Autowired
-    private PdfGeneratorDemo pdfGeneratorDemo;
-
-
     @FXML
     private TextField tourNameTextField;
 
@@ -88,7 +84,6 @@ public class AddTourWindowView implements Initializable {
     }
 
     public void cancelTourButtonAction(ActionEvent event) throws Exception {
-        pdfGeneratorDemo.startDemo();
         Stage stage = (Stage) cancelTourButton.getScene().getWindow();
         stage.close();
     }

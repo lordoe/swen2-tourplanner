@@ -74,6 +74,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="showRouteButton1" layoutX="393.0" layoutY="368.0" mnemonicParsing="false" text="Report" />
+      <Button fx:id="reportTourButton" layoutX="393.0" layoutY="368.0" mnemonicParsing="false" text="Report" />
    </children>
 </AnchorPane>

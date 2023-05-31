@@ -6,6 +6,7 @@ import at.fhtw.swen2.tutorial.presentation.viewmodel.AddTourWindowViewModel;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourDetailsViewModel;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourListViewModel;
 import at.fhtw.swen2.tutorial.service.MapService;
+import at.fhtw.swen2.tutorial.service.PdfGeneratorDemo;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
 import at.fhtw.swen2.tutorial.service.impl.MapServiceImpl;
 import javafx.event.ActionEvent;
@@ -14,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -24,6 +26,9 @@ public class TourDetailsView {
 
     @Autowired
     private TourDetailsViewModel tourDetailsViewModel;
+
+    @Autowired
+    private PdfGeneratorDemo pdfGeneratorDemo;
 
     public javafx.scene.control.Label titleLabel;
 
@@ -51,6 +56,8 @@ public class TourDetailsView {
     public Button editTourButton;
     @FXML
     public Button showRouteButton;
+    @FXML
+    public Button reportTourButton;
     @FXML
     public ImageView imageView;
     @FXML
@@ -88,7 +95,6 @@ public class TourDetailsView {
 
         tourDetailsViewModel.init();
 
-
         // Bindings
         tourNameTextField.textProperty().bindBidirectional(tourDetailsViewModel.nameStringProperty());
         fromTextField.textProperty().bindBidirectional(tourDetailsViewModel.fromStringProperty());
@@ -105,6 +111,7 @@ public class TourDetailsView {
         editTourButton.setOnAction(this::enableFields);
         cancelTourButton.setOnAction(this::cancelTourButtonAction);
         confirmTourButton.setOnAction(this::confirmTourButtonAction);
+        reportTourButton.setOnAction(this::reportTourButtonAction);
 
         disableFields();
     }
@@ -125,5 +132,10 @@ public class TourDetailsView {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
+    }
+
+    @SneakyThrows
+    public void reportTourButtonAction(ActionEvent event){
+        pdfGeneratorDemo.startDemo();
     }
 }
