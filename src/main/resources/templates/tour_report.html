@@ -27,14 +27,15 @@
             max-width: 100px;
             max-height: 100px;
         }
+        .table-container {
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
 <h3><span th:text="${header}"></span></h3>
-<div th:if="${tours.empty}">
-    No Tours Available
-</div>
-<div th:each="tour : ${tours}" class="tour">
+<div th:if="${tour != null}" class="tour">
     <img class="tour-image" th:src="@{${tour.imagePath}}" />
     <div class="tour-info">
         <div>ID: <span th:text="${tour.id}">Id</span></div>
@@ -45,6 +46,28 @@
         <div>Distance: <span th:text="${tour.distance}">Distance</span></div>
         <div>Estimated Time: <span th:text="${tour.estimatedTime}">Estimated Time</span></div>
         <div>Route Information: <span th:text="${tour.routeInformation}">Route Information</span></div>
+    </div>
+</div>
+<div th:if="${tourLog != null}" class="tourLog">
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Comment</th>
+                <th>Date/Time</th>
+                <th>Difficulty</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${tourLog}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.comment}"></td>
+                <td th:text="${item.dateTime}"></td>
+                <td th:text="${item.difficulty}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

@@ -1,5 +1,8 @@
 package at.fhtw.swen2.tutorial.service;
 
+import at.fhtw.swen2.tutorial.presentation.viewmodel.TourListViewModel;
+import at.fhtw.swen2.tutorial.presentation.viewmodel.TourLogListViewModel;
+import at.fhtw.swen2.tutorial.service.dto.Tour;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
@@ -15,7 +18,10 @@ import java.io.OutputStream;
 public class PdfGeneratorDemo {
 
     @Autowired
-    private TourService tourService;
+    private TourListViewModel tourListViewModel;
+
+    @Autowired
+    private TourLogListViewModel tourLogListViewModel;
 
     private String parseThymeleafTemplatePersonList() {
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
@@ -26,10 +32,11 @@ public class PdfGeneratorDemo {
         templateEngine.setTemplateResolver(templateResolver);
 
         Context context = new Context();
-        context.setVariable("header", "Tours");
-        context.setVariable("tours", tourService.getList());
+        context.setVariable("header", "Tour Report");
+        context.setVariable("tour", tourListViewModel.getSelected());
+        context.setVariable("tourLog", tourLogListViewModel.getTourLogListListItems());
 
-        return templateEngine.process("templates/person_list", context);
+        return templateEngine.process("templates/tour_report", context);
     }
 
     private void generatePdfFromHtml(String html) throws Exception {

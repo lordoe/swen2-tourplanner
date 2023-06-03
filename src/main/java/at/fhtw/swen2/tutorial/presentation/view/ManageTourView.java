@@ -47,7 +47,7 @@ public class ManageTourView implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle rb) {
         selectedTour.textProperty().bind(tourListViewModel.selectedTourNameProperty());
-        System.out.println("initailized");
+        System.out.println("initialized");
 
         searchTourField.textProperty().bindBidirectional(tourListViewModel.searchStringProperty());
         // search panel
