@@ -43,16 +43,17 @@
 <body>
 <h3><span th:text="${header}"></span></h3>
 <div th:if="${tour != null}" class="tour">
-    <img class="tour-image" th:src="@{${tour.imagePath}}" />
+    <tr th:each="item : ${tour}">
     <div class="tour-info">
-        <div><b>ID</b>: <span th:text="${tour.id}">Id</span></div>
-        <div><b>Name</b>: <span th:text="${tour.name}">Name</span></div>
-        <div><b>Description</b>: <span th:text="${tour.description}">Description</span></div>
-        <div><b>From</b>: <span th:text="${tour.from}">From</span></div>
-        <div><b>Transport Type</b>: <span th:text="${tour.transportType}">Transport Type</span></div>
-        <div><b>Distance</b>: <span th:text="${tour.distance}">Distance</span></div>
-        <div><b>Estimated Time</b>: <span th:text="${tour.estimatedTime}">Estimated Time</span></div>
+        <div><b>ID</b>: <span th:text="${item.id}">Id</span></div>
+        <div><b>Name</b>: <span th:text="${item.name}">Name</span></div>
+        <div><b>Description</b>: <span th:text="${item.description}">Description</span></div>
+        <div><b>From</b>: <span th:text="${item.from}">From</span></div>
+        <div><b>Transport Type</b>: <span th:text="${item.transportType}">Transport Type</span></div>
+        <div><b>Distance</b>: <span th:text="${item.distance}">Distance</span></div>
+        <div><b>Estimated Time</b>: <span th:text="${item.estimatedTime}">Estimated Time</span></div>
     </div>
+    </tr>
 </div>
 <div th:if="${tourLog != null}" class="tourLog">
     <div class="table-container">
@@ -63,6 +64,8 @@
                 <th>Comment</th>
                 <th>Date/Time</th>
                 <th>Difficulty</th>
+                <th>TimeInMin</th>
+                <th>Rating</th>
             </tr>
             </thead>
             <tbody>
@@ -71,6 +74,8 @@
                 <td th:text="${item.comment}"></td>
                 <td th:text="${item.dateTime}"></td>
                 <td th:text="${item.difficulty}"></td>
+                <td th:text="${item.timeInMinutes}"></td>
+                <td th:text="${item.rating}"></td>
             </tr>
             </tbody>
         </table>

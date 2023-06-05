@@ -130,6 +130,6 @@ public class TourDetailsView {
 
     @SneakyThrows
     public void reportTourButtonAction(ActionEvent event){
-        pdfGeneratorDemo.startDemo();
+        pdfGeneratorDemo.generateTourReport();
     }
 }
