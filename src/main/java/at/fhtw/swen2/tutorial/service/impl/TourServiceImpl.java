@@ -3,16 +3,17 @@ package at.fhtw.swen2.tutorial.service.impl;
 import at.fhtw.swen2.tutorial.persistence.entities.TourEntity;
 import at.fhtw.swen2.tutorial.persistence.repositories.TourRepository;
 import at.fhtw.swen2.tutorial.service.TourService;
-import at.fhtw.swen2.tutorial.service.mapper.TourLogMapper;
-import at.fhtw.swen2.tutorial.service.mapper.TourMapper;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
+import at.fhtw.swen2.tutorial.service.mapper.TourMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @org.springframework.stereotype.Service
 @Transactional
+@Primary        // tell Spring that this is the primary implementation of the TourService interface.
 public class TourServiceImpl implements TourService {
 
     @Autowired
@@ -20,9 +21,6 @@ public class TourServiceImpl implements TourService {
 
     @Autowired
     private TourMapper tourMapper;
-
-    @Autowired
-    private TourLogMapper tourLogMapper;
 
     @Override
     public List<Tour> getList() {

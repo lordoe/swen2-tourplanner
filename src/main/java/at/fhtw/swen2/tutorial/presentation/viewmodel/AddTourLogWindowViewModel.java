@@ -101,7 +101,7 @@ public class AddTourLogWindowViewModel {
         selectedTourLog.setRating((int) rating.getValue().doubleValue());
 
         tourLogService.update(selectedTourLog);
-        tourLogListViewModel.updateItem(selectedTourLog);
+        tourLogListViewModel.filterList("");
     }
 
     public SimpleStringProperty commentProperty() {

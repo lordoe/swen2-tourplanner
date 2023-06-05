@@ -1,9 +1,6 @@
 package at.fhtw.swen2.tutorial.persistence;
 
-import at.fhtw.swen2.tutorial.persistence.entities.PersonEntity;
-import at.fhtw.swen2.tutorial.persistence.entities.TourEntity;
 import at.fhtw.swen2.tutorial.persistence.repositories.PersonRepository;
-import at.fhtw.swen2.tutorial.persistence.repositories.TourRepository;
 import at.fhtw.swen2.tutorial.persistence.utils.Difficulty;
 import at.fhtw.swen2.tutorial.presentation.utils.TransportType;
 import at.fhtw.swen2.tutorial.service.MapService;
@@ -16,7 +13,8 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
 
 @Component
 public class DatabaseInitializer implements InitializingBean {

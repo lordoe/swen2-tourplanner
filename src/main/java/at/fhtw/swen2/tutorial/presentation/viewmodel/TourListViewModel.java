@@ -114,15 +114,4 @@ public class TourListViewModel {
         th.start();
     }
 
-    // updated tour values in list
-    public void updateTour(Tour updated) {
-        if(updated == null) {
-            return;
-        }
-        int index = tourListItems.indexOf(selected);
-        tourListItems.set(index, updated);
-        masterData.set(index, updated);
-        selectedTourName.set("updated: " + updated.getName());
-        selected = updated;
-    }
 }

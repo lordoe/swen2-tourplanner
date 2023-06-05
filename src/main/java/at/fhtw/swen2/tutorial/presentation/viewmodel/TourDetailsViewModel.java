@@ -125,7 +125,7 @@ public class TourDetailsViewModel {
         setDistanceAndEstimatedTime(updated);
 
         // update in List
-        tourListViewModel.updateTour(updated);
+        tourListViewModel.filterList("");
     }
 
 }

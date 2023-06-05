@@ -6,6 +6,7 @@ import at.fhtw.swen2.tutorial.service.mapper.PersonMapper;
 import at.fhtw.swen2.tutorial.service.PersonService;
 import at.fhtw.swen2.tutorial.service.dto.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@Primary
 public class PersonServiceImpl implements PersonService {
 
     @Autowired

@@ -20,6 +20,9 @@ public class Tour {
     private Double estimatedTime;
     private String routeInformation;
     private String imagePath;
+    // computed attributes
+    private String popularity;
+    private Boolean childFriendly;
 
     @Override
     public String toString() {

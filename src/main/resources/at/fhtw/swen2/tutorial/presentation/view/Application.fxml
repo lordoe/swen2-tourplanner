@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="layout" prefHeight="643.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.fhtw.swen2.tutorial.presentation.view.ApplicationView">
+<BorderPane fx:id="layout" prefHeight="685.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.fhtw.swen2.tutorial.presentation.view.ApplicationView">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
+      <MenuBar prefHeight="27.0" prefWidth="868.0" BorderPane.alignment="CENTER">
          <menus>
             <Menu mnemonicParsing="false" text="%menu.file.title">
                <items>
@@ -63,7 +63,7 @@
       </TabPane>
    </center>
    <bottom>
-      <ToolBar maxHeight="20.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" BorderPane.alignment="CENTER">
+      <ToolBar maxHeight="20.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="0.0" prefWidth="708.0" BorderPane.alignment="CENTER">
          <items>
             <Label fx:id="tbMonitorStatus" />
             <Label text="%tab.monitor.status" />

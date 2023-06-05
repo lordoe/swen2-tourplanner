@@ -1,9 +1,7 @@
 package at.fhtw.swen2.tutorial.persistence;
 
-import at.fhtw.swen2.tutorial.persistence.entities.PersonEntity;
 import at.fhtw.swen2.tutorial.persistence.entities.TourLogEntity;
 import at.fhtw.swen2.tutorial.persistence.repositories.TourLogRepository;
-import at.fhtw.swen2.tutorial.persistence.repositories.TourRepository;
 import at.fhtw.swen2.tutorial.persistence.utils.Difficulty;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
