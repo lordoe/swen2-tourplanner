@@ -1,8 +1,7 @@
-package at.fhtw.swen2.tutorial.service;
+package at.fhtw.swen2.tutorial.service.utils;
 
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourListViewModel;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourLogListViewModel;
-import at.fhtw.swen2.tutorial.service.dto.Tour;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
@@ -15,7 +14,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 
 @Component
-public class PdfGeneratorDemo {
+public class PdfGenerator {
 
     @Autowired
     private TourListViewModel tourListViewModel;
@@ -56,6 +55,6 @@ public class PdfGeneratorDemo {
     }
 
     public static void main(String[] args) throws Exception {
-        new PdfGeneratorDemo().startDemo();
+        new PdfGenerator().startDemo();
     }
 }

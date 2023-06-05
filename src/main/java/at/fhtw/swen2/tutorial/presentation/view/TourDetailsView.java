@@ -2,17 +2,11 @@ package at.fhtw.swen2.tutorial.presentation.view;
 
 import at.fhtw.swen2.tutorial.presentation.utils.InvalidParamException;
 import at.fhtw.swen2.tutorial.presentation.utils.TransportType;
-import at.fhtw.swen2.tutorial.presentation.viewmodel.AddTourWindowViewModel;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourDetailsViewModel;
-import at.fhtw.swen2.tutorial.presentation.viewmodel.TourListViewModel;
-import at.fhtw.swen2.tutorial.service.MapService;
-import at.fhtw.swen2.tutorial.service.PdfGeneratorDemo;
-import at.fhtw.swen2.tutorial.service.dto.Tour;
-import at.fhtw.swen2.tutorial.service.impl.MapServiceImpl;
+import at.fhtw.swen2.tutorial.service.utils.PdfGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
@@ -28,7 +22,7 @@ public class TourDetailsView {
     private TourDetailsViewModel tourDetailsViewModel;
 
     @Autowired
-    private PdfGeneratorDemo pdfGeneratorDemo;
+    private PdfGenerator pdfGeneratorDemo;
 
     public javafx.scene.control.Label titleLabel;
 
