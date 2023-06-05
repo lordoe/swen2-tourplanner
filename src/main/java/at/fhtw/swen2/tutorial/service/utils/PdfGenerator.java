@@ -2,6 +2,8 @@ package at.fhtw.swen2.tutorial.service.utils;
 
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourListViewModel;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourLogListViewModel;
+import at.fhtw.swen2.tutorial.service.TourLogService;
+import at.fhtw.swen2.tutorial.service.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
@@ -22,7 +24,13 @@ public class PdfGenerator {
     @Autowired
     private TourLogListViewModel tourLogListViewModel;
 
-    private String parseThymeleafTemplatePersonList() {
+    @Autowired
+    private TourService tourService;
+
+    @Autowired
+    private TourLogService tourLogService;
+
+    private String parseThymeleafTemplateTourReport() {
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(TemplateMode.HTML);
@@ -38,23 +46,53 @@ public class PdfGenerator {
         return templateEngine.process("templates/tour_report", context);
     }
 
-    private void generatePdfFromHtml(String html) throws Exception {
-        String outputFolder = "src/main/resources/templates/thymeleaf.pdf";
+    private String parseThymeleafTemplateSummarizeReport() {
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode(TemplateMode.HTML);
+
+        TemplateEngine templateEngine = new TemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver);
+
+        Context context = new Context();
+        context.setVariable("header", "Summarize Report");
+        context.setVariable("tour", tourService.getList());
+        context.setVariable("tourLog", tourLogService.getList());
+
+        return templateEngine.process("templates/summarize_report", context);
+    }
+
+    private void generateTourReportPdfFromHtml(String html) throws Exception {
+        String outputFolder = "src/main/resources/templates/tour_report.pdf";
         OutputStream outputStream = new FileOutputStream(outputFolder);
         ITextRenderer renderer = new ITextRenderer();
         renderer.setDocumentFromString(html);
         renderer.layout();
         renderer.createPDF(outputStream);
-
         outputStream.close();
     }
 
-    public void startDemo() throws Exception {
-        //generatePdfFromHtml(parseThymeleafTemplateHelloWorld());
-        generatePdfFromHtml(parseThymeleafTemplatePersonList());
+    private void generateSummarizeReportPdfFromHtml(String html) throws Exception {
+        String outputFolder = "src/main/resources/templates/summarize_report.pdf";
+        OutputStream outputStream = new FileOutputStream(outputFolder);
+        ITextRenderer renderer = new ITextRenderer();
+        renderer.setDocumentFromString(html);
+        renderer.layout();
+        renderer.createPDF(outputStream);
+        outputStream.close();
     }
 
+    public void generateTourReport() throws Exception {
+        //generatePdfFromHtml(parseThymeleafTemplateHelloWorld());
+        generateTourReportPdfFromHtml(parseThymeleafTemplateTourReport());
+    }
+
+    public void generateSumReport() throws Exception{
+        generateSummarizeReportPdfFromHtml(parseThymeleafTemplateSummarizeReport());
+    }
+
+
     public static void main(String[] args) throws Exception {
-        new PdfGenerator().startDemo();
+        new PdfGenerator().generateTourReport();
     }
 }

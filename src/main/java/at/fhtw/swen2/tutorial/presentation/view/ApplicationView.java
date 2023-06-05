@@ -3,6 +3,7 @@ package at.fhtw.swen2.tutorial.presentation.view;
 import at.fhtw.swen2.tutorial.presentation.StageAware;
 import at.fhtw.swen2.tutorial.presentation.events.ApplicationShutdownEvent;
 import at.fhtw.swen2.tutorial.presentation.view.AboutDialogView;
+import at.fhtw.swen2.tutorial.service.utils.PdfGenerator;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -25,6 +27,9 @@ import java.util.ResourceBundle;
 @Slf4j
 public class ApplicationView implements Initializable, StageAware {
 
+    @Autowired
+    private PdfGenerator pdfGenerator;
+
     ApplicationEventPublisher publisher;
 
     @FXML BorderPane layout;
@@ -33,6 +38,7 @@ public class ApplicationView implements Initializable, StageAware {
     @FXML MenuItem miPreferences;
     @FXML MenuItem miQuit;
     @FXML MenuItem miAbout;
+    @FXML MenuItem miSumReport;
     
     // Toolbar, at some point break out
     @FXML Label tbMonitorStatus;
@@ -59,6 +65,10 @@ public class ApplicationView implements Initializable, StageAware {
     @FXML 
     public void onHelpAbout(ActionEvent event) {
         new AboutDialogView().show();
+    }
+
+    public void miSumReportAction (ActionEvent event) throws Exception {
+        pdfGenerator.generateSumReport();
     }
 
     @Override
