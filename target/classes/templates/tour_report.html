@@ -1,0 +1,80 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Page Title</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h3 {
+            text-align: center;
+            color: green;
+            margin-top: 20px;
+        }
+
+        .tour {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .tour-info {
+            margin-left: 20px;
+            margin-bottom: 100px;
+        }
+
+        .tour-image {
+            /*max-width: 100px;
+            max-height: 100px;*/
+            overflow-x: auto;
+            white-space: nowrap;
+            display: flex;
+            height: auto;
+            width: 800px;
+        }
+        .table-container {
+            margin-left: 20px;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<h3><span th:text="${header}"></span></h3>
+<div th:if="${tour != null}" class="tour">
+    <img class="tour-image" th:src="@{${tour.imagePath}}" />
+    <div class="tour-info">
+        <div><b>ID</b>: <span th:text="${tour.id}">Id</span></div>
+        <div><b>Name</b>: <span th:text="${tour.name}">Name</span></div>
+        <div><b>Description</b>: <span th:text="${tour.description}">Description</span></div>
+        <div><b>From</b>: <span th:text="${tour.from}">From</span></div>
+        <div><b>Transport Type</b>: <span th:text="${tour.transportType}">Transport Type</span></div>
+        <div><b>Distance</b>: <span th:text="${tour.distance}">Distance</span></div>
+        <div><b>Estimated Time</b>: <span th:text="${tour.estimatedTime}">Estimated Time</span></div>
+    </div>
+</div>
+<div th:if="${tourLog != null}" class="tourLog">
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Comment</th>
+                <th>Date/Time</th>
+                <th>Difficulty</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${tourLog}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.comment}"></td>
+                <td th:text="${item.dateTime}"></td>
+                <td th:text="${item.difficulty}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
