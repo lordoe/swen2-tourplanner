@@ -3,11 +3,12 @@ package at.fhtw.swen2.tutorial.presentation.view;
 import at.fhtw.swen2.tutorial.presentation.utils.InvalidParamException;
 import at.fhtw.swen2.tutorial.presentation.utils.TransportType;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.AddTourWindowViewModel;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -15,9 +16,6 @@ import org.springframework.stereotype.Component;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-
 
 
 @Component
@@ -68,19 +66,74 @@ public class AddTourWindowView implements Initializable {
 
     public void confirmTourButtonAction(ActionEvent event) {
         try {
-            confirmTourButton.setText("loading...");
-            addTourWindowViewModel.addTour();
-            Stage stage = (Stage) confirmTourButton.getScene().getWindow();
-            stage.close();
-        } catch (InvalidParamException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Invalid Tour");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
-            confirmTourButton.setText("save");
+            // Create a ProgressIndicator for the loading animation
+            ProgressIndicator loadingIndicator = new ProgressIndicator();
+
+            // Disable the confirmTourButton while the loading animation is active
+            confirmTourButton.setDisable(true);
+
+            AnchorPane root = (AnchorPane) confirmTourButton.getScene().getRoot();
+            root.getChildren().add(loadingIndicator);
+            AnchorPane.setTopAnchor(loadingIndicator, 0.0);
+            AnchorPane.setBottomAnchor(loadingIndicator, 0.0);
+            AnchorPane.setLeftAnchor(loadingIndicator, 0.0);
+            AnchorPane.setRightAnchor(loadingIndicator, 0.0);
+
+
+            // Start the loading animation
+            loadingIndicator.setProgress(-1); // Indefinite progress
+
+            // Execute the addTour operation asynchronously
+            Task<Void> addTourTask = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {
+                    addTourWindowViewModel.addTour();
+                    return null;
+                }
+            };
+
+            // Set up completion handling after the addTour operation is finished
+            addTourTask.setOnSucceeded(taskEvent -> {
+                // Remove the loadingIndicator from the scene
+                root.getChildren().remove(loadingIndicator);
+
+                // Enable the confirmTourButton again
+                confirmTourButton.setDisable(false);
+
+                // Close the stage
+                Stage stage = (Stage) confirmTourButton.getScene().getWindow();
+                stage.close();
+            });
+
+            // Set up exception handling if an InvalidParamException is thrown
+            addTourTask.setOnFailed(taskEvent -> {
+                // Remove the loadingIndicator from the scene
+                root.getChildren().remove(loadingIndicator);
+
+                // Enable the confirmTourButton again
+                confirmTourButton.setDisable(false);
+
+                // Show an error alert with the exception message
+                Throwable exception = addTourTask.getException();
+                if (exception instanceof InvalidParamException) {
+                    InvalidParamException invalidParamException = (InvalidParamException) exception;
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Invalid Tour");
+                    alert.setContentText(invalidParamException.getMessage());
+                    alert.showAndWait();
+                }
+            });
+
+            // Execute the addTourTask in a separate thread
+            Thread addTourThread = new Thread(addTourTask);
+            addTourThread.start();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+
 
     public void cancelTourButtonAction(ActionEvent event) throws Exception {
         Stage stage = (Stage) cancelTourButton.getScene().getWindow();
