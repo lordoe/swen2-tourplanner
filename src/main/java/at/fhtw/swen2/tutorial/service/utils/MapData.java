@@ -11,5 +11,7 @@ public class MapData {
     private Double distance;
     // in hours
     private Double duration;
+    // to retrieve Map
+    private String sessionId;
     private String imagePath;
 }
