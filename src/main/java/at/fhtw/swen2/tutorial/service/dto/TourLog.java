@@ -1,13 +1,16 @@
 package at.fhtw.swen2.tutorial.service.dto;
 
 import at.fhtw.swen2.tutorial.persistence.utils.Difficulty;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.util.Date;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class TourLog {
     private Long id;
     private Date dateTime;

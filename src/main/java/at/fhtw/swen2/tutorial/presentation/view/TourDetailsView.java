@@ -49,7 +49,7 @@ public class TourDetailsView {
     @FXML
     public Button editTourButton;
     @FXML
-    public Button showRouteButton;
+    public Button exportTourButton;
     @FXML
     public Button reportTourButton;
     @FXML

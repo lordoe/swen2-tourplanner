@@ -2,7 +2,6 @@ package at.fhtw.swen2.tutorial.service.impl.http;
 
 import at.fhtw.swen2.tutorial.service.TourService;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -7,7 +7,6 @@ import at.fhtw.swen2.tutorial.service.TourService;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
 import at.fhtw.swen2.tutorial.service.utils.MapData;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,5 +126,4 @@ public class TourDetailsViewModel {
         // update in List
         tourListViewModel.filterList("");
     }
-
 }
