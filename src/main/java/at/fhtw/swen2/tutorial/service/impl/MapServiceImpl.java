@@ -66,6 +66,7 @@ public class MapServiceImpl implements MapService {
         // get information from MapQuest API
         log.info("Requesting MapQuest API: " + request.uri().toString());
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println(response.body());
         JSONObject jsonpObject = new JSONObject(response.body());
         double distance = jsonpObject.getJSONObject("route").getDouble("distance");
         double time = jsonpObject.getJSONObject("route").getDouble("time")/3600;
@@ -123,9 +124,10 @@ public class MapServiceImpl implements MapService {
             return mapData;
 
         } catch (IOException | InterruptedException | JSONException e) {
+            log.error("error while requesting MapQuest API: " + e.getMessage());
             return null;
         } catch (Exception e) {
-            System.err.println("unknown exception: " + e.getMessage());
+            log.error("unknown exception " + e.getMessage());
             return null;
         }
     }
