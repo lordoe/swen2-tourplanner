@@ -74,16 +74,16 @@ public class DatabaseInitializer implements InitializingBean {
 
         // add some tour logs
         tourLogService.addNew(TourLog.builder().dateTime(new Date()).comment("super").rating(4).difficulty(Difficulty.EASY).TourId(one.getId()).build());
-        tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.APRIL,19)).comment("faad").rating(5).difficulty(Difficulty.MEDIUM).TourId(one.getId()).build());
-        tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.APRIL,10)).comment("lustig").rating(2).difficulty(Difficulty.EASY).TourId(one.getId()).build());
+        tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.APRIL,19)).comment("faad").rating(5).difficulty(Difficulty.MEDIUM).timeInMinutes(120).TourId(one.getId()).build());
+        tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.APRIL,10)).comment("lustig").rating(2).difficulty(Difficulty.EASY).timeInMinutes(10).TourId(one.getId()).build());
 
-        tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.MARCH,1)).comment("schöner Ausblick").rating(4).difficulty(Difficulty.EASY).TourId(two.getId()).build());
-        tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.FEBRUARY,16)).comment("gruselig").rating(10).difficulty(Difficulty.HARD).TourId(two.getId()).build());
-        tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.JANUARY,3)).comment("lange").rating(8).difficulty(Difficulty.HARD).TourId(two.getId()).build());
+        tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.MARCH,1)).comment("schöner Ausblick").rating(4).difficulty(Difficulty.EASY).timeInMinutes(23).TourId(two.getId()).build());
+        tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.FEBRUARY,16)).comment("gruselig").rating(10).difficulty(Difficulty.HARD).timeInMinutes(10).TourId(two.getId()).build());
+        tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.JANUARY,3)).comment("lange").rating(8).difficulty(Difficulty.HARD).timeInMinutes(23).TourId(two.getId()).build());
 
-        tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.APRIL,1)).comment("mega").rating(11).difficulty(Difficulty.HARD).TourId(three.getId()).build());
-        tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.MARCH,20)).comment("entspannt").rating(9).difficulty(Difficulty.MEDIUM).TourId(three.getId()).build());
-        tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.MARCH,11)).comment("grausig").rating(12).difficulty(Difficulty.MEDIUM).TourId(three.getId()).build());
+        tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.APRIL,1)).comment("mega").rating(11).difficulty(Difficulty.HARD).timeInMinutes(35).TourId(three.getId()).build());
+        tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.MARCH,20)).comment("entspannt").rating(9).difficulty(Difficulty.MEDIUM).timeInMinutes(45).TourId(three.getId()).build());
+        tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.MARCH,11)).comment("grausig").rating(12).difficulty(Difficulty.MEDIUM).timeInMinutes(60).TourId(three.getId()).build());
 
     }
 }

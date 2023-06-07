@@ -13,13 +13,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="layout" prefHeight="685.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.fhtw.swen2.tutorial.presentation.view.ApplicationView">
+<BorderPane fx:id="layout" prefHeight="685.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.fhtw.swen2.tutorial.presentation.view.ApplicationView">
    <top>
       <MenuBar prefHeight="27.0" prefWidth="868.0" BorderPane.alignment="CENTER">
          <menus>
             <Menu mnemonicParsing="false" text="%menu.file.title">
                <items>
                   <MenuItem fx:id="miPreferences" mnemonicParsing="false" text="%menu.file.preferences" />
+                  <MenuItem mnemonicParsing="false" text="Summarize Report" fx:id="miSumReport" onAction="#miSumReportAction"/>
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="miQuit" mnemonicParsing="false" onAction="#onFileClose" text="%menu.file.quit" />
                </items>
