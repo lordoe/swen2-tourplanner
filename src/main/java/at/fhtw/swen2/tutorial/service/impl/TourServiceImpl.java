@@ -6,6 +6,7 @@ import at.fhtw.swen2.tutorial.service.TourService;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
 import at.fhtw.swen2.tutorial.service.mapper.TourMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.internal.Function;
 import org.springframework.context.annotation.Primary;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,6 +56,33 @@ public class TourServiceImpl implements TourService {
             return null;
         }
         return tourMapper.fromEntity(tourRepository.save(tourMapper.toEntity(tour)));
+    }
+
+    @Override
+    public double calculateAverage(List<Tour> tours, Function<Tour, Double> propertyExtractor) {
+        double sum = 0.0;
+        int count = 0;
+
+        for (Tour tour : tours) {
+            Double propertyValue = propertyExtractor.apply(tour);
+            if(propertyValue != null) {
+                sum += propertyValue;
+                count++;
+            }
+        }
+
+        if (count == 0) {
+            return 0.0; // or throw an exception, depending on your requirements
+        }
+
+        return sum / count;
+    }
+
+    @Override
+    public double getAverageDistance(){
+        List<Tour> tours = this.getList();
+        double averageDistance = this.calculateAverage(tours, tour -> Double.valueOf(tour.getDistance()));
+        return averageDistance;
     }
 
 }

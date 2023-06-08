@@ -6,6 +6,7 @@ import at.fhtw.swen2.tutorial.service.TourLogService;
 import at.fhtw.swen2.tutorial.service.dto.TourLog;
 import at.fhtw.swen2.tutorial.service.mapper.TourLogMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.internal.Function;
 import org.springframework.context.annotation.Primary;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,5 +64,40 @@ public class TourLogServiceImpl implements TourLogService {
     public List<TourLog> findByTourId(Long id) {
         return tourLogMapper.fromEntity(tourLogRepository.findByTourId(id));
     }
+
+    @Override
+    public double calculateAverage(List<TourLog> tourLogs, Function<TourLog, Double> propertyExtractor) {
+        double sum = 0.0;
+        int count = 0;
+
+        for (TourLog tourLog : tourLogs) {
+            Double propertyValue = propertyExtractor.apply(tourLog);
+            if(propertyValue != null){
+                sum += propertyValue;
+                count++;
+            }
+        }
+
+        if (count == 0) {
+            return 0.0; // or throw an exception, depending on your requirements
+        }
+
+        return sum / count;
+    }
+
+    @Override
+    public double getAverageTime(){
+        List<TourLog> tourLogs = this.getList();
+        double averageTime = this.calculateAverage(tourLogs, tourLog -> Double.valueOf(tourLog.getTimeInMinutes()));
+        return averageTime;
+    }
+
+    @Override
+    public double getAverageRating(){
+        List<TourLog> tourLogs = this.getList();
+        double averageRating = this.calculateAverage(tourLogs, tourLog -> Double.valueOf(tourLog.getRating()));
+        return averageRating;
+    }
+
 
 }

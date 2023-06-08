@@ -73,7 +73,7 @@ public class DatabaseInitializer implements InitializingBean {
 
 
         // add some tour logs
-        tourLogService.addNew(TourLog.builder().dateTime(new Date()).comment("super").rating(4).difficulty(Difficulty.EASY).TourId(one.getId()).build());
+        tourLogService.addNew(TourLog.builder().dateTime(new Date()).comment("super").rating(4).difficulty(Difficulty.EASY).timeInMinutes(10).TourId(one.getId()).build());
         tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.APRIL,19)).comment("faad").rating(5).difficulty(Difficulty.MEDIUM).timeInMinutes(120).TourId(one.getId()).build());
         tourLogService.addNew(TourLog.builder().dateTime(new Date(2023-1900, Calendar.APRIL,10)).comment("lustig").rating(2).difficulty(Difficulty.EASY).timeInMinutes(10).TourId(one.getId()).build());
 
