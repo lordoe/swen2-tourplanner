@@ -2,10 +2,6 @@ package at.fhtw.swen2.tutorial.service.dto;
 
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor

@@ -1,3 +1,4 @@
+
 package at.fhtw.swen2.tutorial.persistence;
 
 import at.fhtw.swen2.tutorial.persistence.repositories.PersonRepository;
@@ -18,9 +19,6 @@ import java.util.Date;
 
 @Component
 public class DatabaseInitializer implements InitializingBean {
-
-    @Autowired
-    private PersonRepository personRepository;
 
     @Autowired
     private TourService tourService;

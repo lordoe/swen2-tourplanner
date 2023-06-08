@@ -13,7 +13,7 @@ import java.util.List;
 
 @org.springframework.stereotype.Service
 @Transactional
-@Primary
+//@Primary
 public class TourLogServiceImpl implements TourLogService {
 
     @Autowired

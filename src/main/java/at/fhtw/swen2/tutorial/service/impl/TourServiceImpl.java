@@ -13,7 +13,7 @@ import java.util.List;
 
 @org.springframework.stereotype.Service
 @Transactional
-@Primary        // tell Spring that this is the primary implementation of the TourService interface.
+//@Primary        // tell Spring that this is the primary implementation of the TourService interface.
 public class TourServiceImpl implements TourService {
 
     @Autowired
