@@ -17,6 +17,10 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+/*
+  * This was intended to be a template for the other services, but it was not used in the end.
+  * It was not used because there were some problems with the serialization of the objects.
+ */
 @Slf4j
 @Transactional
 @org.springframework.stereotype.Service
