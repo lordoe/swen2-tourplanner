@@ -40,9 +40,4 @@ public class TourServiceHttpImpl implements TourService {
     public double calculateAverage(List<Tour> tours, Function<Tour, Double> propertyExtractor) {
         return 0;
     }
-
-    @Override
-    public double getAverageDistance() {
-        return 0;
-    }
 }

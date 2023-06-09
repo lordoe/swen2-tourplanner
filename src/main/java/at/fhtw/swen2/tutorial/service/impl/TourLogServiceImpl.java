@@ -85,19 +85,5 @@ public class TourLogServiceImpl implements TourLogService {
         return sum / count;
     }
 
-    @Override
-    public double getAverageTime(){
-        List<TourLog> tourLogs = this.getList();
-        double averageTime = this.calculateAverage(tourLogs, tourLog -> Double.valueOf(tourLog.getTimeInMinutes()));
-        return averageTime;
-    }
-
-    @Override
-    public double getAverageRating(){
-        List<TourLog> tourLogs = this.getList();
-        double averageRating = this.calculateAverage(tourLogs, tourLog -> Double.valueOf(tourLog.getRating()));
-        return averageRating;
-    }
-
 
 }
