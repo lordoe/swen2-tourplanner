@@ -6,6 +6,7 @@ import at.fhtw.swen2.tutorial.service.TourLogService;
 import at.fhtw.swen2.tutorial.service.dto.TourLog;
 import at.fhtw.swen2.tutorial.service.mapper.TourLogMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.internal.Function;
 import org.springframework.context.annotation.Primary;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,5 +64,6 @@ public class TourLogServiceImpl implements TourLogService {
     public List<TourLog> findByTourId(Long id) {
         return tourLogMapper.fromEntity(tourLogRepository.findByTourId(id));
     }
+
 
 }
