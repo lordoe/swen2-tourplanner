@@ -1,7 +1,6 @@
-
+/*
 package at.fhtw.swen2.tutorial.persistence;
 
-import at.fhtw.swen2.tutorial.persistence.repositories.PersonRepository;
 import at.fhtw.swen2.tutorial.persistence.utils.Difficulty;
 import at.fhtw.swen2.tutorial.presentation.utils.TransportType;
 import at.fhtw.swen2.tutorial.service.MapService;
@@ -85,3 +84,5 @@ public class DatabaseInitializer implements InitializingBean {
 
     }
 }
+
+ */
