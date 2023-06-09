@@ -7,6 +7,4 @@ import java.util.List;
 
 public interface TourService extends Service<Tour> {
     double calculateAverage(List<Tour> tours, Function<Tour, Double> propertyExtractor);
-
-    double getAverageDistance();
 }

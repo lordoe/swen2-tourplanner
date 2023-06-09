@@ -36,12 +36,6 @@ class PdfGeneratorTest {
     @Autowired
     private TourLogService tourLogService;
 
-    @Test
-    public void getAssociatedLogs()
-    {
-        tourLogService.getList().forEach(tourLogListViewModel::addItem);
-    }
-
 
     @Test
     public void getAverageTime(){
@@ -69,85 +63,6 @@ class PdfGeneratorTest {
         List<Tour> tours = tourService.getList();
         double averageDistance = tourService.calculateAverage(tours, tour -> Double.valueOf(tour.getDistance()));
         System.out.println("Average Distance: " + averageDistance);
-    }
-
-
-    @Test
-    public String parseThymeleafTemplateTourReport() {
-        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode(TemplateMode.HTML);
-
-        TemplateEngine templateEngine = new TemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver);
-
-        Context context = new Context();
-        context.setVariable("header", "Tour Report");
-        context.setVariable("tour", tourListViewModel.getSelected());
-        context.setVariable("tourLog", tourLogListViewModel.getTourLogListListItems());
-
-        ObservableList<TourLog> tourLogs = tourLogListViewModel.getTourLogListListItems();
-        double averageTime = tourLogService.calculateAverage(tourLogs, tourLog -> Double.valueOf(tourLog.getTimeInMinutes()));
-        context.setVariable("averageTime", averageTime);
-        System.out.println("Average time: " + averageTime);
-
-        return templateEngine.process("templates/tour_report", context);
-    }
-
-    @Test
-    public String parseThymeleafTemplateSummarizeReport() {
-        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode(TemplateMode.HTML);
-
-        TemplateEngine templateEngine = new TemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver);
-
-        Context context = new Context();
-        context.setVariable("header", "Summarize Report");
-        context.setVariable("tour", tourService.getList());
-        context.setVariable("tourLog", tourLogService.getList());
-
-        return templateEngine.process("templates/summarize_report", context);
-    }
-
-    @Test
-    public void generateTourReportPdfFromHtml(String html) throws Exception {
-        String outputFolder = "src/main/resources/templates/tour_report.pdf";
-        OutputStream outputStream = new FileOutputStream(outputFolder);
-        ITextRenderer renderer = new ITextRenderer();
-        renderer.setDocumentFromString(html);
-        renderer.layout();
-        renderer.createPDF(outputStream);
-        outputStream.close();
-    }
-
-    @Test
-    public void generateSummarizeReportPdfFromHtml(String html) throws Exception {
-        String outputFolder = "src/main/resources/templates/summarize_report.pdf";
-        OutputStream outputStream = new FileOutputStream(outputFolder);
-        ITextRenderer renderer = new ITextRenderer();
-        renderer.setDocumentFromString(html);
-        renderer.layout();
-        renderer.createPDF(outputStream);
-        outputStream.close();
-    }
-
-
-    @Test
-    public void generateTourReport() throws Exception {
-        //generatePdfFromHtml(parseThymeleafTemplateHelloWorld());
-        generateTourReportPdfFromHtml(parseThymeleafTemplateTourReport());
-    }
-
-    @Test
-    public void generateSumReport() throws Exception{
-        generateSummarizeReportPdfFromHtml(parseThymeleafTemplateSummarizeReport());
-    }
-
-
-    public static void main(String[] args) throws Exception {
-        new PdfGenerator().generateTourReport();
     }
 
 }

@@ -11,7 +11,4 @@ public interface TourLogService extends Service<TourLog> {
 
     double calculateAverage(List<TourLog> tourLogs, Function<TourLog, Double> propertyExtractor);
 
-    double getAverageTime();
-
-    double getAverageRating();
 }

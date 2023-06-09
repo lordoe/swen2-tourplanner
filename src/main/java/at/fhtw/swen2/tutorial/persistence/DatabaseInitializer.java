@@ -20,9 +20,6 @@ import java.util.Date;
 public class DatabaseInitializer implements InitializingBean {
 
     @Autowired
-    private PersonRepository personRepository;
-
-    @Autowired
     private TourService tourService;
 
     @Autowired
@@ -32,7 +29,7 @@ public class DatabaseInitializer implements InitializingBean {
     private MapService mapService;
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
 
         // add some tours
         MapData mapData = mapService.getMap("Wien", "Rotterdam", "fastest");

@@ -78,11 +78,4 @@ public class TourServiceImpl implements TourService {
         return sum / count;
     }
 
-    @Override
-    public double getAverageDistance(){
-        List<Tour> tours = this.getList();
-        double averageDistance = this.calculateAverage(tours, tour -> Double.valueOf(tour.getDistance()));
-        return averageDistance;
-    }
-
 }
