@@ -44,8 +44,6 @@ class TourLogServiceImplTest {
                 .build();
 
         // Act
-        //tourLog.setTour(controlTour);
-        //tourLog1.setTour(controlTour);
         tourLogService.addNew(tourLog);
         tourLogService.addNew(tourLog1);
         List<TourLog> tourLogs = tourLogService.findByTourId(controlTour.getId());

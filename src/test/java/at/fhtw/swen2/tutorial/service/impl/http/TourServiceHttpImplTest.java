@@ -40,6 +40,8 @@ class TourServiceHttpImplTest {
 
         // Assert
         assertNotNull(control);
+        assertEquals(tour.getName(), control.getName());
+        assertNotNull(control.getId());
     }
 
     @Test
