@@ -66,18 +66,21 @@ public class MapServiceImpl implements MapService {
         // get information from MapQuest API
         log.info("Requesting MapQuest API: " + request.uri().toString());
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println(response.body());
         JSONObject jsonpObject = new JSONObject(response.body());
         double distance = jsonpObject.getJSONObject("route").getDouble("distance");
         double time = jsonpObject.getJSONObject("route").getDouble("time")/3600;
+        String sessionID = jsonpObject.getJSONObject("route").getString("sessionId");
         MapData mapData = new MapData();
         mapData.setDistance(distance);
         mapData.setDuration(time);
+        mapData.setSessionId(sessionID);
 
         // save mapdata to Path
         objectMapper.writeValue(path.toFile(), mapData);
         return mapData;
     }
-    private String requestStaticMap(String from, String to, String transportType) throws IOException {
+    private String requestStaticMap(String from, String to, String sessionId) throws IOException {
         // check if file exists at Path:
         String savePath = "src/main/resources/maps/" + from + "_" + to + ".png";
         if(Files.exists(Paths.get(savePath))) {
@@ -86,7 +89,7 @@ public class MapServiceImpl implements MapService {
 
         // get image from MapQuest API
         String size = "600,400@2x";
-        String strUrl = "https://www.mapquestapi.com/staticmap/v5/map?start=" + from + "&end=" + to + "&size=" + size + "&key=" + apiKey;
+        String strUrl = "https://www.mapquestapi.com/staticmap/v5/map?start=" + from + "&end=" + to + "&size=" + size + "&key=" + apiKey + "&sessionId=" + sessionId;
         URL url = new URL(strUrl);
         log.info("Requesting MapQuest API: " + url.toString());
         HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
@@ -116,14 +119,15 @@ public class MapServiceImpl implements MapService {
     public MapData getMap(String from, String to, String transportType) {
         try {
             MapData mapData = requestMapData(from, to, transportType);
-            String imagePath = requestStaticMap(from, to, transportType);
+            String imagePath = requestStaticMap(from, to, mapData.getSessionId());
             mapData.setImagePath(imagePath);
             return mapData;
 
         } catch (IOException | InterruptedException | JSONException e) {
+            log.error("error while requesting MapQuest API: " + e.getMessage());
             return null;
         } catch (Exception e) {
-            System.err.println("unknown exception: " + e.getMessage());
+            log.error("unknown exception " + e.getMessage());
             return null;
         }
     }

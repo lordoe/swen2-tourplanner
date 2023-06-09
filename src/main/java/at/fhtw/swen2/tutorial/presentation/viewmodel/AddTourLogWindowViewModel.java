@@ -45,7 +45,9 @@ public class AddTourLogWindowViewModel {
 
     public void initAdd() {
         comment.setValue("");
-        date.setValue(LocalDate.now());
+        date.setValue(null);
+        difficulty.setValue(null);
+        rating.setValue(null);
         tourId.setValue(tourListViewModel.getSelected().getId());
     }
 

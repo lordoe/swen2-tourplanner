@@ -77,7 +77,7 @@ public class PdfGenerator {
             averageTimes.add(averageTime);
         }
 
-        double averageDistance = tourService.calculateAverage(tours, tour -> Double.valueOf(tour.getDistance()));
+        double averageDistance = tourService.calculateAverage(tours, Tour::getDistance);
 
         context.setVariable("averageDistances", averageDistance);
         context.setVariable("averageRatings", averageRatings);

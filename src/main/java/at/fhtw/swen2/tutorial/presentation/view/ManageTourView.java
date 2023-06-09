@@ -1,6 +1,7 @@
 package at.fhtw.swen2.tutorial.presentation.view;
 
 import at.fhtw.swen2.tutorial.presentation.ViewManager;
+import at.fhtw.swen2.tutorial.presentation.viewmodel.ManageTourViewModel;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourListViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,12 +10,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -26,9 +30,10 @@ public class ManageTourView implements Initializable {
 
     @Autowired
     private TourListViewModel tourListViewModel;
-
     @Autowired
     private ViewManager viewManager;
+    @Autowired
+    private ManageTourViewModel manageTourViewModel;
     @FXML
     private Button addTourButton;
     @FXML
@@ -43,6 +48,8 @@ public class ManageTourView implements Initializable {
     private TextField searchTourField;
     @FXML
     public Label searchLabel;
+    public Button importTourButton;
+    public Button exportTourButton;
 
     @Override
     public void initialize(URL location, ResourceBundle rb) {
@@ -75,13 +82,17 @@ public class ManageTourView implements Initializable {
         }
     }
 
+    public void showErrorAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
     public void deleteTourButtonAction(ActionEvent event) {
         if(tourListViewModel.getSelected() == null){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("No Tour selected");
-            alert.setContentText("Please select a Tour to delete");
-            alert.showAndWait();
+            showErrorAlert("Error", "No Tour selected", "Please select a Tour to delete");
             return;
         }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -97,11 +108,7 @@ public class ManageTourView implements Initializable {
 
     public void tourInfoButtonAction(ActionEvent actionEvent) {
         if(tourListViewModel.getSelected() == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("No Tour selected");
-            alert.setContentText("Please select a Tour to view");
-            alert.showAndWait();
+            showErrorAlert("Error", "No Tour selected", "Please select a Tour to view");
             return;
         }
         try {
@@ -111,6 +118,37 @@ public class ManageTourView implements Initializable {
             stage.show();
         } catch(Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void importButtonAction(ActionEvent actionEvent) {
+        try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Select Tour to import");
+            fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON Files", "*.json"));
+            File selectedFile = fileChooser.showOpenDialog(importTourButton.getScene().getWindow());
+            if (selectedFile != null) {
+                manageTourViewModel.importTour(selectedFile.getAbsolutePath());
+            }
+        } catch (Exception e) {
+            showErrorAlert("Error", "Error while importing Tour", e.getMessage());
+        }
+    }
+
+    public void exportButtonAction(ActionEvent actionEvent) {
+        if(tourListViewModel.getSelected() == null) {
+            showErrorAlert("Error", "No Tour selected", "Please select a Tour to export");
+            return;
+        }
+        Stage stage = (Stage) exportTourButton.getScene().getWindow();
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Select directory to export tour");
+        directoryChooser.setInitialDirectory(new java.io.File(System.getProperty("user.home")));
+        java.io.File selectedDirectory = directoryChooser.showDialog(stage);
+
+        if (selectedDirectory != null) {
+            manageTourViewModel.exportTour(selectedDirectory.getAbsolutePath());
         }
     }
 }

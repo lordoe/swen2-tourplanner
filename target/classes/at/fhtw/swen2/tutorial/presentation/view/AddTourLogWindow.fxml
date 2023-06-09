@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="486.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.fhtw.swen2.tutorial.presentation.view.AddTourLogWindowView">
    <children>
-      <Label fx:id="titleLabel" alignment="CENTER" layoutY="32.0" text="Add LOG" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0">
+      <Label fx:id="titleLabel" alignment="CENTER" layoutY="32.0" text="TourLOG" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0">
          <font>
             <Font size="18.0" />
          </font>
