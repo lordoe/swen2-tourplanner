@@ -25,8 +25,8 @@
         }
 
         .tour-image {
-            /*max-width: 100px;
-            max-height: 100px;*/
+            max-width: 100px;
+            max-height: 100px;
             overflow-x: auto;
             white-space: nowrap;
             display: flex;
@@ -34,53 +34,59 @@
             width: 800px;
         }
         .table-container {
-            margin-left: 20px;
-            display: flex;
+            margin-top-top: 30px;
+            margin-bottom: 30px;
+            display: inline;
             justify-content: center;
         }
     </style>
 </head>
 <body>
 <h3><span th:text="${header}"></span></h3>
+<b style="text-align: center; margin-left: 20px" >Average Distances: <span th:text="${averageDistances}"></span> </b><br></br><br></br>
 <div th:if="${tour != null}" class="tour">
-    <tr th:each="item : ${tour}">
+    <tr th:each="item, tourIndex : ${tour}">
     <div class="tour-info">
+        <img class="tour-image" th:src="@{${item.imagePath}}" />
         <div><b>ID</b>: <span th:text="${item.id}">Id</span></div>
         <div><b>Name</b>: <span th:text="${item.name}">Name</span></div>
         <div><b>Description</b>: <span th:text="${item.description}">Description</span></div>
         <div><b>From</b>: <span th:text="${item.from}">From</span></div>
         <div><b>Transport Type</b>: <span th:text="${item.transportType}">Transport Type</span></div>
         <div><b>Distance</b>: <span th:text="${item.distance}">Distance</span></div>
-        <div><b>Estimated Time</b>: <span th:text="${item.estimatedTime}">Estimated Time</span></div>
+        <div><b>Estimated Time</b>: <span th:text="${item.estimatedTime}">Estimated Time</span></div><br></br>
+        <div th:if="${tourLog != null}" class="tourLog">
+            <div class="table-container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Comment</th>
+                        <th>Date/Time</th>
+                        <th>Difficulty</th>
+                        <th>TimeInMin</th>
+                        <th>Rating</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="log : ${tourLog}" th:if="${log.tourId == item.id}"> <!-- show associated tourlogs -->
+                        <td th:text="${log.id}"></td>
+                        <td th:text="${log.comment}"></td>
+                        <td th:text="${log.dateTime}"></td>
+                        <td th:text="${log.difficulty}"></td>
+                        <td th:text="${log.timeInMinutes}"></td>
+                        <td th:text="${log.rating}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br></br>
+                <b>Average Time: <span th:text="${averageTimes[tourIndex.index]}"></span></b><br></br>
+                <b>Average Rating: <span th:text="${averageRatings[tourIndex.index]}"></span></b>
+            </div>
+        </div>
     </div>
     </tr>
 </div>
-<div th:if="${tourLog != null}" class="tourLog">
-    <div class="table-container">
-        <table>
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Comment</th>
-                <th>Date/Time</th>
-                <th>Difficulty</th>
-                <th>TimeInMin</th>
-                <th>Rating</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="item : ${tourLog}">
-                <td th:text="${item.id}"></td>
-                <td th:text="${item.comment}"></td>
-                <td th:text="${item.dateTime}"></td>
-                <td th:text="${item.difficulty}"></td>
-                <td th:text="${item.timeInMinutes}"></td>
-                <td th:text="${item.rating}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <h3>herst<span th:text="${averageTime}"></span></h3>
-</div>
+
 </body>
 </html>

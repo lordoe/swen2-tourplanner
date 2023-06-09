@@ -36,6 +36,12 @@ class PdfGeneratorTest {
     @Autowired
     private TourLogService tourLogService;
 
+    @Test
+    public void getAssociatedLogs()
+    {
+        tourLogService.getList().forEach(tourLogListViewModel::addItem);
+    }
+
 
     @Test
     public void getAverageTime(){

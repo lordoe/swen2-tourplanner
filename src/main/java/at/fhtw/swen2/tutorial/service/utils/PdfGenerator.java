@@ -4,9 +4,11 @@ import at.fhtw.swen2.tutorial.presentation.viewmodel.TourListViewModel;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourLogListViewModel;
 import at.fhtw.swen2.tutorial.service.TourLogService;
 import at.fhtw.swen2.tutorial.service.TourService;
+import at.fhtw.swen2.tutorial.service.dto.Tour;
 import at.fhtw.swen2.tutorial.service.dto.TourLog;
 import javafx.collections.ObservableList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.internal.Function;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -16,6 +18,8 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class PdfGenerator {
@@ -45,13 +49,14 @@ public class PdfGenerator {
         context.setVariable("tour", tourListViewModel.getSelected());
         context.setVariable("tourLog", tourLogListViewModel.getTourLogListListItems());
 
-        ObservableList<TourLog> tourLogs = tourLogListViewModel.getTourLogListListItems();
-        double averageTime = tourLogService.calculateAverage(tourLogs, tourLog -> Double.valueOf(tourLog.getTimeInMinutes()));
-        context.setVariable("averageTime", averageTime);
         return templateEngine.process("templates/tour_report", context);
     }
 
     private String parseThymeleafTemplateSummarizeReport() {
+        List<Tour> tours = tourService.getList();
+        List<Double> averageTimes = new ArrayList<>();
+        List<Double> averageRatings = new ArrayList<>();
+
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(TemplateMode.HTML);
@@ -61,8 +66,23 @@ public class PdfGenerator {
 
         Context context = new Context();
         context.setVariable("header", "Summarize Report");
-        context.setVariable("tour", tourService.getList());
+        context.setVariable("tour", tours);
         context.setVariable("tourLog", tourLogService.getList());
+
+        for (Tour tour : tours) {
+            List<TourLog> tourLogs = tourLogService.findByTourId(tour.getId());
+            double averageTime = tourLogService.calculateAverage(tourLogs, tourLog -> Double.valueOf(tourLog.getTimeInMinutes()));
+            double averageRating = tourLogService.calculateAverage(tourLogs, tourLog -> Double.valueOf(tourLog.getRating()));
+
+            averageRatings.add(averageRating);
+            averageTimes.add(averageTime);
+        }
+
+        double averageDistance = tourService.calculateAverage(tours, tour -> Double.valueOf(tour.getDistance()));
+
+        context.setVariable("averageDistances", averageDistance);
+        context.setVariable("averageRatings", averageRatings);
+        context.setVariable("averageTimes", averageTimes);
 
         return templateEngine.process("templates/summarize_report", context);
     }
