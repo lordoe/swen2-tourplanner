@@ -6,6 +6,7 @@ import at.fhtw.swen2.tutorial.service.TourLogService;
 import at.fhtw.swen2.tutorial.service.TourService;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
 import at.fhtw.swen2.tutorial.service.dto.TourLog;
+import at.fhtw.swen2.tutorial.service.utils.AverageCalculator;
 import at.fhtw.swen2.tutorial.service.utils.PdfGenerator;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
@@ -36,6 +37,9 @@ class PdfGeneratorTest {
     @Autowired
     private TourLogService tourLogService;
 
+    private final AverageCalculator<TourLog> tourLogAverageCalculator = new AverageCalculator<>();
+    private final AverageCalculator<Tour> tourAverageCalculator = new AverageCalculator<>();
+
 
     @Test
     public void getAverageTime(){
@@ -45,7 +49,7 @@ class PdfGeneratorTest {
             System.out.println(tourLog);
         }
 
-        double averageTime = tourLogService.calculateAverage(tourLogs, tourLog -> Double.valueOf(tourLog.getTimeInMinutes()));
+        double averageTime = tourLogAverageCalculator.calculateAverage(tourLogs, tourLog -> Double.valueOf(tourLog.getTimeInMinutes()));
         // context.setVariable("averageTime", averageTime);
         System.out.println("Average Time: " + averageTime);
     }
@@ -53,7 +57,7 @@ class PdfGeneratorTest {
     @Test
     public void getAverageRating(){
         List<TourLog> tourLogs = tourLogService.getList();
-        double averageRating = tourLogService.calculateAverage(tourLogs, tourLog -> Double.valueOf(tourLog.getRating()));
+        double averageRating = tourLogAverageCalculator.calculateAverage(tourLogs, tourLog -> Double.valueOf(tourLog.getRating()));
         // context.setVariable("averageTime", averageTime);
         System.out.println("Average Rating: " + averageRating);
     }
@@ -61,7 +65,7 @@ class PdfGeneratorTest {
     @Test
     public void getAverageDistance(){
         List<Tour> tours = tourService.getList();
-        double averageDistance = tourService.calculateAverage(tours, tour -> Double.valueOf(tour.getDistance()));
+        double averageDistance = tourAverageCalculator.calculateAverage(tours, Tour::getDistance);
         System.out.println("Average Distance: " + averageDistance);
     }
 

@@ -65,25 +65,5 @@ public class TourLogServiceImpl implements TourLogService {
         return tourLogMapper.fromEntity(tourLogRepository.findByTourId(id));
     }
 
-    @Override
-    public double calculateAverage(List<TourLog> tourLogs, Function<TourLog, Double> propertyExtractor) {
-        double sum = 0.0;
-        int count = 0;
-
-        for (TourLog tourLog : tourLogs) {
-            Double propertyValue = propertyExtractor.apply(tourLog);
-            if(propertyValue != null){
-                sum += propertyValue;
-                count++;
-            }
-        }
-
-        if (count == 0) {
-            return 0.0; // or throw an exception, depending on your requirements
-        }
-
-        return sum / count;
-    }
-
 
 }

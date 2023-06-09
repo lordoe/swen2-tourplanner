@@ -35,6 +35,9 @@ public class PdfGenerator {
     @Autowired
     private TourLogService tourLogService;
 
+    private final AverageCalculator<TourLog> tourLogAverageCalculator = new AverageCalculator<>();
+    private final AverageCalculator<Tour> tourAverageCalculator = new AverageCalculator<>();
+
     private String parseThymeleafTemplateTourReport() {
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setSuffix(".html");
@@ -70,14 +73,14 @@ public class PdfGenerator {
 
         for (Tour tour : tours) {
             List<TourLog> tourLogs = tourLogService.findByTourId(tour.getId());
-            double averageTime = tourLogService.calculateAverage(tourLogs, tourLog -> Double.valueOf(tourLog.getTimeInMinutes()));
-            double averageRating = tourLogService.calculateAverage(tourLogs, tourLog -> Double.valueOf(tourLog.getRating()));
+            double averageTime = tourLogAverageCalculator.calculateAverage(tourLogs, tourLog -> Double.valueOf(tourLog.getTimeInMinutes()));
+            double averageRating = tourLogAverageCalculator.calculateAverage(tourLogs, tourLog -> Double.valueOf(tourLog.getRating()));
 
             averageRatings.add(averageRating);
             averageTimes.add(averageTime);
         }
 
-        double averageDistance = tourService.calculateAverage(tours, Tour::getDistance);
+        double averageDistance = tourAverageCalculator.calculateAverage(tours, Tour::getDistance);
 
         context.setVariable("averageDistances", averageDistance);
         context.setVariable("averageRatings", averageRatings);

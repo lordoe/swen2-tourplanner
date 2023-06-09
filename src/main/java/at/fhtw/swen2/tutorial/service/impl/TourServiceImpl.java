@@ -58,24 +58,4 @@ public class TourServiceImpl implements TourService {
         return tourMapper.fromEntity(tourRepository.save(tourMapper.toEntity(tour)));
     }
 
-    @Override
-    public double calculateAverage(List<Tour> tours, Function<Tour, Double> propertyExtractor) {
-        double sum = 0.0;
-        int count = 0;
-
-        for (Tour tour : tours) {
-            Double propertyValue = propertyExtractor.apply(tour);
-            if(propertyValue != null) {
-                sum += propertyValue;
-                count++;
-            }
-        }
-
-        if (count == 0) {
-            return 0.0; // or throw an exception, depending on your requirements
-        }
-
-        return sum / count;
-    }
-
 }

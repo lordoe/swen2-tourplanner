@@ -28,7 +28,6 @@ public class TourServiceHttpImpl implements TourService {
 
     @Override
     public void delete(Tour tour) {
-
     }
 
     @Override
@@ -36,8 +35,4 @@ public class TourServiceHttpImpl implements TourService {
         return null;
     }
 
-    @Override
-    public double calculateAverage(List<Tour> tours, Function<Tour, Double> propertyExtractor) {
-        return 0;
-    }
 }
