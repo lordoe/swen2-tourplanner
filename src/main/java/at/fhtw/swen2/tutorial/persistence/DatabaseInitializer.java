@@ -1,4 +1,4 @@
-/*
+
 package at.fhtw.swen2.tutorial.persistence;
 
 import at.fhtw.swen2.tutorial.persistence.utils.Difficulty;
@@ -84,5 +84,3 @@ public class DatabaseInitializer implements InitializingBean {
 
     }
 }
-
- */
