@@ -44,13 +44,12 @@ public class ImportExportServiceImpl implements ImportExportService {
             if (Files.exists(path)) {
                 String json = Files.readString(path);
                 TourData tourData = objectMapper.readValue(json, TourData.class);
-                Tour saved = tourService.addNew(tourData.getTour());
-                // if the tour already exists, we don't want to import it again
-                if(tourData.getTour().getId().equals(saved.getId())){
-                    return null;
-                }
+                Tour tour = tourData.getTour();
+                tour.setId(null);
+                Tour saved = tourService.addNew(tour);
                 tourData.setTour(saved);
                 for (TourLog tourLog: tourData.getTourLogs()) {
+                    tourLog.setId(null); // make sure we create a new tourLog (not update existing)
                     tourLog.setTourId(saved.getId());
                     tourLog.setId(tourLogService.addNew(tourLog).getId());
                 }

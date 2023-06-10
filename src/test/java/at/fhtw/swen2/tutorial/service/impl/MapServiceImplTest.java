@@ -4,13 +4,19 @@ import at.fhtw.swen2.tutorial.service.MapService;
 import at.fhtw.swen2.tutorial.service.utils.MapData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Map;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+/*
+  * Tests integration with the MapQuest API.
+ */
 
 @SpringBootTest
 class MapServiceImplTest {
@@ -19,6 +25,17 @@ class MapServiceImplTest {
     private MapService mapService;
 
     private ObjectMapper objectMapper = new ObjectMapper();
+
+    @AfterAll
+    static void cleanUp() {
+        try {
+            String filePath = Paths.get("").toAbsolutePath().toString();
+            Files.deleteIfExists(Paths.get(filePath + "/src/main/resources/maps/.Ulm_Ulm_bicycle.json"));
+            Files.deleteIfExists(Paths.get(filePath + "/src/main/resources/maps/Ulm_Ulm.png"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     void testMapMapData() throws JsonProcessingException {

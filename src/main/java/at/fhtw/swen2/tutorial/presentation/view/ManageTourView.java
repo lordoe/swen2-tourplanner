@@ -1,6 +1,7 @@
 package at.fhtw.swen2.tutorial.presentation.view;
 
 import at.fhtw.swen2.tutorial.presentation.ViewManager;
+import at.fhtw.swen2.tutorial.presentation.utils.AlertRaiser;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.ManageTourViewModel;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourListViewModel;
 import javafx.event.ActionEvent;
@@ -34,6 +35,9 @@ public class ManageTourView implements Initializable {
     private ViewManager viewManager;
     @Autowired
     private ManageTourViewModel manageTourViewModel;
+
+    @Autowired
+    private AlertRaiser alertRaiser;
     @FXML
     private Button addTourButton;
     @FXML
@@ -82,25 +86,15 @@ public class ManageTourView implements Initializable {
         }
     }
 
-    public void showErrorAlert(String title, String header, String content) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
-
     public void deleteTourButtonAction(ActionEvent event) {
         if(tourListViewModel.getSelected() == null){
-            showErrorAlert("Error", "No Tour selected", "Please select a Tour to delete");
+            alertRaiser.showErrorAlert("Error", "No Tour selected", "Please select a Tour to delete");
             return;
         }
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Warning");
-        alert.setHeaderText("You are about to delete " + selectedTour.getText());
-        alert.setContentText("Cannot be undone. Are you sure?");
-
-        Optional<ButtonType> result = alert.showAndWait();
+        Optional<ButtonType>  result = alertRaiser.showConfirmationAlert(
+                "Warning",
+                "You are about to delete " + (selectedTour != null ? selectedTour.getText() : "this Tour"),
+                "Cannot be undone. Are you sure?");
         if (result.get() == ButtonType.OK){
             tourListViewModel.deleteSelectedTour();
         }
@@ -108,7 +102,7 @@ public class ManageTourView implements Initializable {
 
     public void tourInfoButtonAction(ActionEvent actionEvent) {
         if(tourListViewModel.getSelected() == null) {
-            showErrorAlert("Error", "No Tour selected", "Please select a Tour to view");
+            alertRaiser.showErrorAlert("Error", "No Tour selected", "Please select a Tour to view");
             return;
         }
         try {
@@ -132,13 +126,13 @@ public class ManageTourView implements Initializable {
                 manageTourViewModel.importTour(selectedFile.getAbsolutePath());
             }
         } catch (Exception e) {
-            showErrorAlert("Error", "Error while importing Tour", e.getMessage());
+            alertRaiser.showErrorAlert("Error", "Error while importing Tour", e.getMessage());
         }
     }
 
     public void exportButtonAction(ActionEvent actionEvent) {
         if(tourListViewModel.getSelected() == null) {
-            showErrorAlert("Error", "No Tour selected", "Please select a Tour to export");
+            alertRaiser.showErrorAlert("Error", "No Tour selected", "Please select a Tour to export");
             return;
         }
         Stage stage = (Stage) exportTourButton.getScene().getWindow();

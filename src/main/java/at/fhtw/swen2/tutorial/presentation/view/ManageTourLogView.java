@@ -2,6 +2,7 @@ package at.fhtw.swen2.tutorial.presentation.view;
 
 
 import at.fhtw.swen2.tutorial.presentation.ViewManager;
+import at.fhtw.swen2.tutorial.presentation.utils.AlertRaiser;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.SearchTourLogViewModel;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourListViewModel;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourLogListViewModel;
@@ -26,19 +27,17 @@ public class ManageTourLogView {
 
     public static final int PAGE_ITEMS_COUNT = 10;
 
-
     @Autowired
     private ViewManager viewManager;
-
     @Autowired
     private SearchTourLogViewModel searchTourLogViewModel;
-
     @Autowired
     private TourListViewModel tourListViewModel;
-
     @Autowired
     private TourLogListViewModel tourLogListViewModel;
 
+    @Autowired
+    private AlertRaiser alertRaiser;
     @FXML
     private TextField searchField;
     @FXML
@@ -87,11 +86,7 @@ public class ManageTourLogView {
 
     public void addTourLogButtonAction(ActionEvent actionEvent) {
         if(tourListViewModel.getSelected() == null){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("No Tour selected");
-            alert.setContentText("Please select a Tour first");
-            alert.showAndWait();
+            alertRaiser.showErrorAlert("No Tour selected","Error", "Please select a Tour to add a TourLog");
             return;
         }
         try {
@@ -107,18 +102,13 @@ public class ManageTourLogView {
 
     public void deleteTourLogButtonAction(ActionEvent actionEvent) {
         if(tourLogListViewModel.getSelected() == null){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("No TourLog selected");
-            alert.setContentText("Please select a TourLog to delete");
-            alert.showAndWait();
+            alertRaiser.showErrorAlert("No TourLog selected","Error", "Please select a TourLog to delete");
             return;
         }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Warning");
         alert.setHeaderText("You are about to delete Log: " + tourLogListViewModel.getSelected().getId());
         alert.setContentText("Cannot be undone. Are you sure?");
-
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
             tourLogListViewModel.deleteSelectedTourLog();
@@ -127,11 +117,7 @@ public class ManageTourLogView {
 
     public void editTourLogButtonAction(ActionEvent actionEvent) {
         if(tourLogListViewModel.getSelected() == null){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("No TourLog selected");
-            alert.setContentText("Please select a TourLog to edit");
-            alert.showAndWait();
+            alertRaiser.showErrorAlert("No TourLog selected","Error", "Please select a TourLog to edit");
             return;
         }
         try {

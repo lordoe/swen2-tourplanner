@@ -1,6 +1,7 @@
 package at.fhtw.swen2.tutorial.presentation.view;
 
 import at.fhtw.swen2.tutorial.persistence.utils.Difficulty;
+import at.fhtw.swen2.tutorial.presentation.utils.AlertRaiser;
 import at.fhtw.swen2.tutorial.presentation.utils.InvalidParamException;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.AddTourLogWindowViewModel;
 import javafx.event.ActionEvent;
@@ -17,7 +18,8 @@ public class AddTourLogWindowView {
 
     @Autowired
     private AddTourLogWindowViewModel addTourLogWindowViewModel;
-
+    @Autowired
+    private AlertRaiser alertRaiser;
     @FXML
     public Button confirmButton;
     @FXML
@@ -71,11 +73,7 @@ public class AddTourLogWindowView {
             Stage stage = (Stage) confirmButton.getScene().getWindow();
             stage.close();
         } catch (InvalidParamException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Invalid Data");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            alertRaiser.showErrorAlert("Error", "Invalid data", e.getMessage());
             confirmButton.setText("save");
         }
     }

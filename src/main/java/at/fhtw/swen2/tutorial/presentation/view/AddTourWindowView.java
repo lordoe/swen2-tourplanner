@@ -1,5 +1,6 @@
 package at.fhtw.swen2.tutorial.presentation.view;
 
+import at.fhtw.swen2.tutorial.presentation.utils.AlertRaiser;
 import at.fhtw.swen2.tutorial.presentation.utils.InvalidParamException;
 import at.fhtw.swen2.tutorial.presentation.utils.TransportType;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.AddTourWindowViewModel;
@@ -26,6 +27,8 @@ public class AddTourWindowView implements Initializable {
 
     @Autowired
     private AddTourWindowViewModel addTourWindowViewModel;
+    @Autowired
+    private AlertRaiser alertRaiser;
 
     @FXML
     private TextField tourNameTextField;
@@ -113,15 +116,9 @@ public class AddTourWindowView implements Initializable {
                 // Enable the confirmTourButton again
                 confirmTourButton.setDisable(false);
 
-                // Show an error alert with the exception message
                 Throwable exception = addTourTask.getException();
-                if (exception instanceof InvalidParamException) {
-                    InvalidParamException invalidParamException = (InvalidParamException) exception;
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("Invalid Tour");
-                    alert.setContentText(invalidParamException.getMessage());
-                    alert.showAndWait();
+                if (exception instanceof InvalidParamException invalidParamException) {
+                    alertRaiser.showErrorAlert("Error", "Invalid parameter", invalidParamException.getMessage());
                 }
             });
 

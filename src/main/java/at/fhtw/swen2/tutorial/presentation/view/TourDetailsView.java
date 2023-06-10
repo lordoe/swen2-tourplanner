@@ -1,5 +1,6 @@
 package at.fhtw.swen2.tutorial.presentation.view;
 
+import at.fhtw.swen2.tutorial.presentation.utils.AlertRaiser;
 import at.fhtw.swen2.tutorial.presentation.utils.InvalidParamException;
 import at.fhtw.swen2.tutorial.presentation.utils.TransportType;
 import at.fhtw.swen2.tutorial.presentation.viewmodel.TourDetailsViewModel;
@@ -18,12 +19,14 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 public class TourDetailsView {
 
+
     @Autowired
     private TourDetailsViewModel tourDetailsViewModel;
-
     @Autowired
     private PdfGenerator pdfGeneratorDemo;
 
+    @Autowired
+    private AlertRaiser alertRaiser;
     public javafx.scene.control.Label titleLabel;
 
     @FXML
@@ -120,11 +123,7 @@ public class TourDetailsView {
             tourDetailsViewModel.updateTour();
             disableFields();
         } catch (InvalidParamException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            alertRaiser.showErrorAlert("Error Dialog", "Error", e.getMessage());
         }
     }
 
