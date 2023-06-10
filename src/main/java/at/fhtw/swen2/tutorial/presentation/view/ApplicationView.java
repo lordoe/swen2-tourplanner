@@ -2,6 +2,7 @@ package at.fhtw.swen2.tutorial.presentation.view;
 
 import at.fhtw.swen2.tutorial.presentation.StageAware;
 import at.fhtw.swen2.tutorial.presentation.events.ApplicationShutdownEvent;
+import at.fhtw.swen2.tutorial.presentation.utils.AlertRaiser;
 import at.fhtw.swen2.tutorial.presentation.view.AboutDialogView;
 import at.fhtw.swen2.tutorial.service.utils.PdfGenerator;
 import javafx.beans.property.SimpleObjectProperty;
@@ -29,6 +30,8 @@ public class ApplicationView implements Initializable, StageAware {
 
     @Autowired
     private PdfGenerator pdfGenerator;
+    @Autowired
+    private AlertRaiser alertRaiser;
 
     ApplicationEventPublisher publisher;
 
@@ -69,6 +72,7 @@ public class ApplicationView implements Initializable, StageAware {
 
     public void miSumReportAction (ActionEvent event) throws Exception {
         pdfGenerator.generateSumReport();
+        alertRaiser.showInfoAlert("Info", "success","Sum report generated");
     }
 
     @Override

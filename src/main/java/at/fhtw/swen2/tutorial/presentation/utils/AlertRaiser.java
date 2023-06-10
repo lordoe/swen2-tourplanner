@@ -23,4 +23,12 @@ public class AlertRaiser {
         alert.setContentText(content);
         return alert.showAndWait();
     }
+
+    public void showInfoAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 }

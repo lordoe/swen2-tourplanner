@@ -130,5 +130,6 @@ public class TourDetailsView {
     @SneakyThrows
     public void reportTourButtonAction(ActionEvent event){
         pdfGeneratorDemo.generateTourReport();
+        alertRaiser.showInfoAlert("Information Dialog", "Information", "Report generated successfully");
     }
 }

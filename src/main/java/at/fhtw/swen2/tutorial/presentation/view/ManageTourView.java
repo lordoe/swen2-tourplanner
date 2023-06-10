@@ -125,6 +125,7 @@ public class ManageTourView implements Initializable {
             if (selectedFile != null) {
                 manageTourViewModel.importTour(selectedFile.getAbsolutePath());
             }
+            alertRaiser.showInfoAlert("Success", "Tour imported successfully", "Tour imported successfully");
         } catch (Exception e) {
             alertRaiser.showErrorAlert("Error", "Error while importing Tour", e.getMessage());
         }
@@ -143,6 +144,7 @@ public class ManageTourView implements Initializable {
 
         if (selectedDirectory != null) {
             manageTourViewModel.exportTour(selectedDirectory.getAbsolutePath());
+            alertRaiser.showInfoAlert("Success", "Tour exported successfully", "Tour exported successfully");
         }
     }
 }

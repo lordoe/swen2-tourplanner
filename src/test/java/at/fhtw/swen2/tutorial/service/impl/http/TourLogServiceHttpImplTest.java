@@ -10,7 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/*
+    TEST NOTE:
+    integration test
+    tests backend connection
+    for test to work the http server must be running
+    and the http service must be primary
+ */
 @SpringBootTest
 class TourLogServiceHttpImplTest {
 

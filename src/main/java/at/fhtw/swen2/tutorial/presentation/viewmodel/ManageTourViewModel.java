@@ -35,6 +35,8 @@ public class ManageTourViewModel {
             for (TourLog tourlog: tourData.getTourLogs()) {
                 tourLogListViewModel.addItem(tourlog);
             }
+            return;
         }
+        throw new IOException("TourData is null");
     }
 }
