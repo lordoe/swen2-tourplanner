@@ -1,5 +1,6 @@
 package at.fhtw.swen2.tutorial.service.dto;
 
+import at.fhtw.swen2.tutorial.service.utils.MapData;
 import lombok.*;
 
 @Data
@@ -34,5 +35,14 @@ public class Tour {
                 "Distance: " + distance + "\n" +
                 "Estimated time: " + estimatedTime + "\n" +
                 "Information: " + routeInformation;
+    }
+
+    public void updateMapData(MapData mapData) {
+        if(mapData == null) {
+            return;
+        }
+        this.distance = mapData.getDistance();
+        this.estimatedTime = mapData.getDuration();
+        this.imagePath = mapData.getImagePath();
     }
 }

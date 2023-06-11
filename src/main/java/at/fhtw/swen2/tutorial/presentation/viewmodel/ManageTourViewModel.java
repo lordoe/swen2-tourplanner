@@ -30,13 +30,13 @@ public class ManageTourViewModel {
 
     public void importTour(String absolutePath) throws IOException {
         TourData tourData = importExportService.importTourData(absolutePath);
-        if(tourData != null){
+        if(tourData != null && tourData.getTour() != null){
             tourListViewModel.addItem(tourData.getTour());
             for (TourLog tourlog: tourData.getTourLogs()) {
                 tourLogListViewModel.addItem(tourlog);
             }
             return;
         }
-        throw new IOException("TourData is null");
+        throw new IOException("Could not import Tour, please check the file.");
     }
 }

@@ -1,10 +1,12 @@
 package at.fhtw.swen2.tutorial.service.impl;
 
 import at.fhtw.swen2.tutorial.service.ImportExportService;
+import at.fhtw.swen2.tutorial.service.MapService;
 import at.fhtw.swen2.tutorial.service.TourLogService;
 import at.fhtw.swen2.tutorial.service.TourService;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
 import at.fhtw.swen2.tutorial.service.dto.TourLog;
+import at.fhtw.swen2.tutorial.service.utils.MapData;
 import at.fhtw.swen2.tutorial.service.utils.TourData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class ImportExportServiceImpl implements ImportExportService {
     private TourService tourService;
     @Autowired
     private TourLogService tourLogService;
+    @Autowired
+    private MapService mapService;
+
     private final ObjectMapper objectMapper = new ObjectMapper();
     @Override
     public void exportTourData(Tour tour, String path) {
@@ -42,10 +47,18 @@ public class ImportExportServiceImpl implements ImportExportService {
         try {
             Path path = Paths.get(absolutePath);
             if (Files.exists(path)) {
+                // read json file data to String
                 String json = Files.readString(path);
+                // convert json string to object
                 TourData tourData = objectMapper.readValue(json, TourData.class);
                 Tour tour = tourData.getTour();
                 tour.setId(null);
+                // get MapData from MapService
+                MapData mapData = mapService.getMap(tour.getFrom(), tour.getTo(), tour.getTransportType());
+                if(mapData == null){
+                    return null;
+                }
+                tour.updateMapData(mapData);
                 Tour saved = tourService.addNew(tour);
                 tourData.setTour(saved);
                 for (TourLog tourLog: tourData.getTourLogs()) {

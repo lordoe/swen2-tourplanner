@@ -47,9 +47,18 @@ public class TourListView implements Initializable {
         id.setMaxWidth(50);
         TableColumn name = new TableColumn("NAME");
         name.setCellValueFactory(new PropertyValueFactory("name"));
-        tableView.getColumns().addAll(id, name);
+        name.setMinWidth(100);
+        TableColumn from = new TableColumn("FROM");
+        from.setCellValueFactory(new PropertyValueFactory("from"));
+        from.setMinWidth(100);
+        TableColumn to = new TableColumn("TO");
+        to.setCellValueFactory(new PropertyValueFactory("to"));
+        to.setMinWidth(100);
+
+        tableView.getColumns().addAll(id, name, from, to);
 
         dataContainer.getChildren().add(tableView);
+
         tourListViewModel.initList();
 
         // add onclick event

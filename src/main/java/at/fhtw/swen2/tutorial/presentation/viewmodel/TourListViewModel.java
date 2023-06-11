@@ -2,21 +2,16 @@ package at.fhtw.swen2.tutorial.presentation.viewmodel;
 
 import at.fhtw.swen2.tutorial.service.TourService;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
-import at.fhtw.swen2.tutorial.service.dto.TourLog;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 @Component
@@ -100,7 +95,10 @@ public class TourListViewModel {
                 return masterData
                         .stream()
                         .filter(value -> value.getName().toLowerCase().contains(searchText.toLowerCase())
-                        || value.getId().toString().contains(searchText.toLowerCase()))
+                        || value.getId().toString().contains(searchText.toLowerCase())
+                        || value.getFrom().toLowerCase().contains(searchText.toLowerCase())
+                        || value.getTo().toLowerCase().contains(searchText.toLowerCase())
+                        )
                         .collect(Collectors.toList());
             }
         };
