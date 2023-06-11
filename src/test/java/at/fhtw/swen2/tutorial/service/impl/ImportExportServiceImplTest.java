@@ -1,9 +1,11 @@
 package at.fhtw.swen2.tutorial.service.impl;
 
+import at.fhtw.swen2.tutorial.service.MapService;
 import at.fhtw.swen2.tutorial.service.TourLogService;
 import at.fhtw.swen2.tutorial.service.TourService;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
 import at.fhtw.swen2.tutorial.service.dto.TourLog;
+import at.fhtw.swen2.tutorial.service.utils.MapData;
 import at.fhtw.swen2.tutorial.service.utils.TourData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterAll;
@@ -32,9 +34,10 @@ class ImportExportServiceImplTest {
 
     @Mock
     private TourService tourService;
-
     @Mock
     private TourLogService tourLogService;
+    @Mock
+    private MapService mapService;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -80,12 +83,13 @@ class ImportExportServiceImplTest {
     @Test
     void importTourData() throws Exception {
         // Arrange
-        Tour tour = new Tour();
-        tour.setId(1L);
+        Tour tour = Tour.builder()
+                .id(1L)
+                .build();
         TourData tourData = new TourData(tour, Collections.emptyList());
 
         when(tourService.addNew(any())).thenReturn(tour);
-
+        when(mapService.getMap(any(), any(), any())).thenReturn(new MapData());
         String filePath = Paths.get("").toAbsolutePath().toString();
         filePath += "/src/test/java/at/fhtw/swen2/tutorial/service/impl/importExport/import_test.json";
         objectMapper.writeValue(new java.io.File(filePath), tourData);

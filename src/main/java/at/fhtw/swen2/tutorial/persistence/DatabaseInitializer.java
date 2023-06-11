@@ -11,6 +11,7 @@ import at.fhtw.swen2.tutorial.service.dto.TourLog;
 import at.fhtw.swen2.tutorial.service.utils.MapData;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
@@ -28,8 +29,15 @@ public class DatabaseInitializer implements InitializingBean {
     @Autowired
     private MapService mapService;
 
+    @Value("${fill.db}")
+    private Boolean fillDb;
+
     @Override
     public void afterPropertiesSet() {
+
+        if(!fillDb){
+            return;
+        }
 
         // add some tours
         MapData mapData = mapService.getMap("Wien", "Rotterdam", "fastest");
@@ -84,5 +92,3 @@ public class DatabaseInitializer implements InitializingBean {
 
     }
 }
-
-

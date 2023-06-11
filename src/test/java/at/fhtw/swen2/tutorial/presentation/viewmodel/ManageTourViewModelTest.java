@@ -4,6 +4,7 @@ import at.fhtw.swen2.tutorial.service.ImportExportService;
 import at.fhtw.swen2.tutorial.service.dto.Tour;
 import at.fhtw.swen2.tutorial.service.dto.TourLog;
 import at.fhtw.swen2.tutorial.service.utils.TourData;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -72,14 +73,15 @@ public class ManageTourViewModelTest {
     }
 
     @Test
-    void testImportTour_tourDataNull() throws IOException {
+    void testImportTour_tourDataNull() {
         // Arrange
         when(importExportService.importTourData("/path/to/tourData.json")).thenReturn(null);
 
-        // Act
-        manageTourViewModel.importTour("/path/to/tourData.json");
+        // Act and Assert
+        Assertions.assertThrows(IOException.class, () -> {
+            manageTourViewModel.importTour("/path/to/tourData.json");
+        });
 
-        // Assert
         verify(tourListViewModel, never()).addItem(any());
         verify(tourLogListViewModel, never()).addItem(any());
     }

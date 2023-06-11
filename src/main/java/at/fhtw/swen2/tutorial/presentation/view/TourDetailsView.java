@@ -62,7 +62,7 @@ public class TourDetailsView {
     @FXML
     public Label distance;
 
-    private void disableFields() {
+    void disableFields() {
         tourNameTextField.setDisable(true);
         tourNameTextField.setStyle("-fx-opacity: 1.0;-fx-background-color: #eaeaea;");
         fromTextField.setDisable(true);
@@ -129,7 +129,12 @@ public class TourDetailsView {
 
     @SneakyThrows
     public void reportTourButtonAction(ActionEvent event){
-        pdfGeneratorDemo.generateTourReport();
+        try {
+            pdfGeneratorDemo.generateTourReport();
+        } catch (InvalidParamException e) {
+            alertRaiser.showErrorAlert("Error Dialog", "Error", e.getMessage());
+            return;
+        }
         alertRaiser.showInfoAlert("Information Dialog", "Information", "Report generated successfully");
     }
 }
